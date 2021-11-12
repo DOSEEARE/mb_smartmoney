@@ -1,17 +1,16 @@
 package com.molbulak.smartmoney.service.network
 
-import android.content.Context
 import android.util.Log
+import com.molbulak.smartmoney.service.AppPreferences
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import com.molbulak.smartmoney.service.AppPreferences
 import java.util.concurrent.TimeUnit
 
-class RetrofitClient(context: Context) {
+class RetrofitClient {
 
     private val authInterceptor = Interceptor { chain ->
         val newUrl = chain.request().url
@@ -20,7 +19,7 @@ class RetrofitClient(context: Context) {
 
         val newRequest = chain.request()
             .newBuilder()
-            .addHeader("Authorization", "Bearer " + AppPreferences.accessToken)
+            .addHeader("Authorization", "Bearer" + AppPreferences.accessToken)
             .url(newUrl)
             .build()
         chain.proceed(newRequest)
@@ -29,7 +28,6 @@ class RetrofitClient(context: Context) {
     private var httpLoggingInterceptor = run {
         val httpLoggingInterceptor1 =
             HttpLoggingInterceptor { message -> Log.d("okhttp", message) }
-
         httpLoggingInterceptor1.apply {
             httpLoggingInterceptor1.level = HttpLoggingInterceptor.Level.BODY
         }
@@ -52,7 +50,6 @@ class RetrofitClient(context: Context) {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-    fun apiService(isWorkNote: Boolean) =
-        retrofit("https://auth.stage.smartro.ru/api/").create(ApiService::class.java)
-
+    fun apiService() =
+        retrofit("https://crm-api-dev.molbulak.ru/api/app/").create(ApiService::class.java)
 }

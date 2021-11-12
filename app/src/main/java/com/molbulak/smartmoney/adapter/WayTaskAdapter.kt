@@ -1,10 +1,10 @@
-package ru.smartro.worknote.adapter
+/*
+package com.molbulak.smartmoney.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_choose.view.*
 import ru.smartro.worknote.R
@@ -68,4 +68,4 @@ class WayTaskAdapter(private val items: ArrayList<Workorder>, val listener: Sele
     interface SelectListener {
         fun selectedWayTask(model: Workorder)
     }
-}
+}*/

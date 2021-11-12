@@ -4,7 +4,7 @@ package ru.smartro.worknote.service.network.response.auth
 import com.google.gson.annotations.SerializedName
 
 
-data class AuthResponse(
+data class LoginResponse(
     @SerializedName("data")
     val data: Data,
     @SerializedName("success")

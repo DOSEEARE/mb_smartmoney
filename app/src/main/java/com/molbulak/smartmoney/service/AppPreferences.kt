@@ -20,9 +20,9 @@ object AppPreferences {
         editor.apply()
     }
 
-/*
-    var accessToken: String?
-        get() = preferences.getString("accessToken", "")
+
+    var accessToken: String
+        get() = preferences.getString("accessToken", "")!!
         set(value) = preferences.edit {
             it.putString("accessToken", value)
         }
@@ -38,6 +38,4 @@ object AppPreferences {
         set(value) = preferences.edit {
             it.putString("userLogin", value)
         }
-*/
-
 }
