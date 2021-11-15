@@ -23,18 +23,18 @@ class MainHostActivity : AppCompatActivity() {
         binding = ActivityMainHostBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.navView.setOnClickListener {
-            App.getRouter().navigateTo(Screens.LoginScreen())
+            SmApp.getRouter().navigateTo(Screens.LoginScreen())
         }
 
     }
 
     override fun onResume() {
         super.onResume()
-        App.INSTANCE.getNavigator().setNavigator(navigator)
+        SmApp.INSTANCE.getNavigator().setNavigator(navigator)
     }
 
     override fun onPause() {
         super.onPause()
-        App.INSTANCE.getNavigator().removeNavigator()
+        SmApp.INSTANCE.getNavigator().removeNavigator()
     }
 }

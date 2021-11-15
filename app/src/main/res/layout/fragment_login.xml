@@ -11,17 +11,17 @@
         android:layout_width="116dp"
         android:layout_height="56dp"
         android:layout_marginStart="@dimen/default_margin"
-        android:layout_marginTop="32dp"
         android:src="@drawable/ic_logo"
+        app:layout_constraintBottom_toTopOf="@id/login_ly_input"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <LinearLayout
+        android:id="@+id/login_ly_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/default_margin"
-        android:layout_marginTop="64dp"
         android:layout_marginBottom="@dimen/big_margin"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,40 +34,41 @@
             android:fontFamily="@font/inter_bold"
             android:gravity="center_horizontal"
             android:text="@string/enter"
-            android:textSize="20dp"
+            android:textSize="@dimen/title_size"
             android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/login_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_height"
+            android:layout_marginTop="@dimen/default_margin"
+            android:background="@drawable/bg_input"
+            android:hint="@string/login"
+            android:inputType="number"
+            android:maxLines="1"
+            android:paddingStart="@dimen/default_margin"
+            android:textCursorDrawable="@drawable/bg_cursor_orange"
+            android:textSize="12sp" />
+
+
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginBottom="12dp"
-            android:theme="@style/LoginInput">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/login"
-                android:inputType="number"
-                android:maxLines="1"
-                android:textSize="12sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/LoginInput"
+            app:boxStrokeWidth="0dp"
+            app:hintEnabled="false"
             app:passwordToggleEnabled="true">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
+                android:id="@+id/password_et"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/input_height"
+                android:background="@drawable/bg_input"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLines="1"
+                android:paddingStart="@dimen/default_margin"
+                android:textCursorDrawable="@drawable/bg_cursor_orange"
                 android:textSize="12sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -75,30 +76,30 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="21dp"
+            android:layout_marginTop="@dimen/default_margin"
             android:text="@string/remember_password"
-            android:theme="@style/MyCheckBox"
-            android:layout_marginTop="@dimen/default_margin" />
+            android:theme="@style/MyCheckBox" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginTop="@dimen/small_margin"
-            android:theme="@style/MyCheckBox"
-            android:text="@string/login_by_code" />
+            android:text="@string/login_by_code"
+            android:theme="@style/MyCheckBox" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="21dp"
-            android:theme="@style/MyCheckBox"
             android:layout_marginTop="@dimen/small_margin"
-            android:text="@string/login_by_fingerprint"/>
+            android:text="@string/login_by_fingerprint"
+            android:theme="@style/MyCheckBox" />
 
         <Button
             android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
-            android:background="@drawable/bg_login_btn"
+            android:background="@drawable/bg_default_btn"
             android:foreground="?attr/selectableItemBackground"
             android:text="@string/next"
             android:textColor="@color/white" />

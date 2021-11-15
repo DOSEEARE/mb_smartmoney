@@ -1,18 +1,22 @@
 package com.molbulak.smartmoney.service.network
 
-import com.molbulak.smartmoney.service.network.body.LoginBody
-import com.molbulak.smartmoney.service.network.response.CrmResponse
+import com.molbulak.smartmoney.service.network.response.country.CountryResponse
+import com.molbulak.smartmoney.service.network.response.login.LoginResponse
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Query
-import ru.smartro.worknote.service.network.response.auth.LoginResponse
 
 interface ApiService {
 
-    @POST("login")
-    suspend fun login(@Body loginBody: LoginBody)
-            : Response<CrmResponse<LoginResponse>>
+    @POST("login/")
+    suspend fun login(@Body loginBody: MultipartBody)
+            : Response<LoginResponse>
+
+    @POST("listAvailableCountry/")
+    suspend fun availableCountry()
+            : Response<CountryResponse>
 
 /*
     @POST("login")

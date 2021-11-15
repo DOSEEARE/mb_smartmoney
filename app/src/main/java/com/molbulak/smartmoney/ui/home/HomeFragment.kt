@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.molbulak.smartmoney.App
-import com.molbulak.smartmoney.cicerone.Screens
 import com.molbulak.smartmoney.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {

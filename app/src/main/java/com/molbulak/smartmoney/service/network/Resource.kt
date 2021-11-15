@@ -1,16 +1,18 @@
 package com.molbulak.smartmoney.service.network
 
 
-data class Resource<out T>(val status: Status, val data: T?, val msg: String?) {
+data class Resource<out T>(val status: Status, val  data: T?, val msg: String?, val code: Int?) {
     companion object {
-        fun <T> success(data: T?, msg: String = ""): Resource<T> {
-            return Resource(Status.SUCCESS, data, msg)
+        fun <T> success(data: T?, msg: String = "", code: Int?): Resource<T> {
+            return Resource(Status.SUCCESS, data, msg, code)
         }
-        fun <T> error(msg: String = "", data: T? = null): Resource<T> {
-            return Resource(Status.ERROR, data, msg)
+
+        fun <T> error(data: T?, msg: String = "", code: Int?): Resource<T> {
+            return Resource(Status.ERROR, data, msg, code)
         }
-        fun <T> network(msg: String = "", data: T? = null): Resource<T> {
-            return Resource(Status.NETWORK, data, msg)
+
+        fun <T> network(data: T?, msg: String = "", code: Int?): Resource<T> {
+            return Resource(Status.NETWORK, data, msg, code)
         }
     }
 }

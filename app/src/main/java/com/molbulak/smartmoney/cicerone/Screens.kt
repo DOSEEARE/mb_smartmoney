@@ -4,6 +4,7 @@ import android.content.Intent
 import com.github.terrakok.cicerone.androidx.ActivityScreen
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.molbulak.smartmoney.MainHostActivity
+import com.molbulak.smartmoney.ui.login.AuthFragment
 import com.molbulak.smartmoney.ui.login.LoginFragment
 import com.molbulak.smartmoney.ui.login.LoginHostActivity
 
@@ -18,6 +19,10 @@ object Screens {
 
     fun LoginScreen() = FragmentScreen {
         LoginFragment()
+    }
+
+    fun AuthScreen() = FragmentScreen{
+        AuthFragment()
     }
 
 }

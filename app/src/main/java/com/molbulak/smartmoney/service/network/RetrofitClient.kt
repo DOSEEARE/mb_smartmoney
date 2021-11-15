@@ -19,7 +19,8 @@ class RetrofitClient {
 
         val newRequest = chain.request()
             .newBuilder()
-            .addHeader("Authorization", "Bearer" + AppPreferences.accessToken)
+            .addHeader("token", AppPreferences.accessToken)
+            .addHeader("api-key", "Cq3Kry")
             .url(newUrl)
             .build()
         chain.proceed(newRequest)
