@@ -18,4 +18,22 @@
     <string name="number_phone">Номер телефона</string>
     <string name="available_country_list">Список доступных стран</string>
     <string name="close">Закрыть</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="wrong_format">Неверный формат</string>
+    <string name="name">Имя</string>
+    <string name="choose_password">Выберите пароль</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="choose_question">Выберите секретный вопрос</string>
+    <string name="answer_question">Ответ на вопрос</string>
+    <string name="agree_with">Я согласен с <font color='#F09236'>условиями</font> обработки персональных данных</string>
+    <string name="registration_now">Зарегистрироваться</string>
+    <string name="already_registered">Уже зарегистрированы ?</string>
+    <string name="surname">Фамилия</string>
+    <string name="second_name">Отчество</string>
+    <string name="born_date">Дата рождения</string>
+    <string name="gender">Пол</string>
+    <string name="nationality">Национальность</string>
+    <string name="traffic_source">Где вы узнали о нас</string>
+    <string name="choose_gender">Выберите пол</string>
 </resources>

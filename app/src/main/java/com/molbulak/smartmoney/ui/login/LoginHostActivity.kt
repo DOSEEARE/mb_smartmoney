@@ -9,8 +9,8 @@ import com.github.terrakok.cicerone.Replace
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.molbulak.smartmoney.R
-import com.molbulak.smartmoney.SmApp
-import com.molbulak.smartmoney.cicerone.Screens
+import com.molbulak.smartmoney.App
+import com.molbulak.smartmoney.Screens
 import com.molbulak.smartmoney.databinding.ActivityAuthHostBinding
 
 class LoginHostActivity : AppCompatActivity() {
@@ -44,11 +44,11 @@ class LoginHostActivity : AppCompatActivity() {
 
     override fun onResumeFragments() {
         super.onResumeFragments()
-        SmApp.INSTANCE.getNavigator().setNavigator(navigator)
+        App.INSTANCE.getNavigator().setNavigator(navigator)
     }
 
     override fun onPause() {
         super.onPause()
-        SmApp.INSTANCE.getNavigator().removeNavigator()
+        App.INSTANCE.getNavigator().removeNavigator()
     }
 }

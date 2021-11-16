@@ -1,12 +1,16 @@
 package com.molbulak.smartmoney.service.network
 
+import com.molbulak.smartmoney.service.network.response.check_phone.CheckPhoneResponse
 import com.molbulak.smartmoney.service.network.response.country.CountryResponse
+import com.molbulak.smartmoney.service.network.response.gender.GenderResponse
 import com.molbulak.smartmoney.service.network.response.login.LoginResponse
+import com.molbulak.smartmoney.service.network.response.nationality.NationalityResponse
+import com.molbulak.smartmoney.service.network.response.question.QuestionResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface ApiService {
 
@@ -14,9 +18,25 @@ interface ApiService {
     suspend fun login(@Body loginBody: MultipartBody)
             : Response<LoginResponse>
 
-    @POST("listAvailableCountry/")
+    @GET("listAvailableCountry/")
     suspend fun availableCountry()
             : Response<CountryResponse>
+
+    @GET("checkPhone/")
+    suspend fun checkPhone(@Body checkPhoneBody: MultipartBody)
+            : Response<CheckPhoneResponse>
+
+    @GET("listGender/")
+    suspend fun gender(@Body genderBody : MultipartBody)
+            : Response<GenderResponse>
+
+    @GET("listNationality/")
+    suspend fun nationality(@Body genderBody : MultipartBody)
+            : Response<NationalityResponse>
+
+    @GET("listSecretQuestion/")
+    suspend fun question(@Body genderBody : MultipartBody)
+            : Response<QuestionResponse>
 
 /*
     @POST("login")

@@ -1,12 +1,12 @@
-package com.molbulak.smartmoney.cicerone
+package com.molbulak.smartmoney
 
 import android.content.Intent
 import com.github.terrakok.cicerone.androidx.ActivityScreen
 import com.github.terrakok.cicerone.androidx.FragmentScreen
-import com.molbulak.smartmoney.MainHostActivity
-import com.molbulak.smartmoney.ui.login.AuthFragment
 import com.molbulak.smartmoney.ui.login.LoginFragment
 import com.molbulak.smartmoney.ui.login.LoginHostActivity
+import com.molbulak.smartmoney.ui.login.auth.AuthFragment
+import com.molbulak.smartmoney.ui.login.check_number.CheckNumberFragment
 
 object Screens {
     fun LoginHostScreen() = ActivityScreen {
@@ -21,8 +21,12 @@ object Screens {
         LoginFragment()
     }
 
-    fun AuthScreen() = FragmentScreen{
-        AuthFragment()
+    fun CheckNumberScreen() = FragmentScreen {
+        CheckNumberFragment()
+    }
+
+    fun AuthScreen(id: Int) = FragmentScreen {
+        AuthFragment(id)
     }
 
 }

@@ -1,0 +1,113 @@
+package com.molbulak.smartmoney.ui.login.check_number
+
+import android.os.Bundle
+import android.text.InputType
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.molbulak.smartmoney.App
+import com.molbulak.smartmoney.R
+import com.molbulak.smartmoney.Screens
+import com.molbulak.smartmoney.adapter.SelectListener
+import com.molbulak.smartmoney.databinding.FragmentCheckNumberBinding
+import com.molbulak.smartmoney.extensions.toast
+import com.molbulak.smartmoney.service.network.Status
+import com.molbulak.smartmoney.service.network.body.CheckPhoneBody
+import com.molbulak.smartmoney.service.network.response.country.CountryResult
+import com.molbulak.smartmoney.ui.login.LoginViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import ru.tinkoff.decoro.MaskImpl
+import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
+import ru.tinkoff.decoro.slots.PredefinedSlots
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher
+
+
+class CheckNumberFragment : Fragment(), SelectListener {
+    private lateinit var binding: FragmentCheckNumberBinding
+    private lateinit var chooseFragment: ChooseCountryBottomFragment
+    private val viewModel: LoginViewModel by viewModel()
+    private var availableCountries = listOf<CountryResult>()
+    private var selectedCountry: CountryResult? = null
+
+    private var inputMask =
+        MaskFormatWatcher(MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER))
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        binding = FragmentCheckNumberBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.backBtn.setOnClickListener { App.getRouter().exit() }
+        binding.numberPhone.inputType = InputType.TYPE_CLASS_PHONE
+        binding.nextBtn.setOnClickListener {
+            checkNumberPhone()
+        }
+        initAvailableCountries()
+    }
+
+
+    private fun initAvailableCountries() {
+        chooseFragment = ChooseCountryBottomFragment(availableCountries, selectedCountry, this)
+        viewModel.availableCountry().observe(viewLifecycleOwner, {
+            val data = it.data
+            when (it.status) {
+                Status.SUCCESS -> {
+                    availableCountries = (it.data?.result!!)
+                    binding.countryDrop.setOnClickListener {
+                        chooseFragment =
+                            ChooseCountryBottomFragment(availableCountries, selectedCountry, this)
+                        chooseFragment.show(childFragmentManager, "ChooseCountryBottomFragment")
+                    }
+                }
+                Status.ERROR -> {
+                    toast("error country ${data!!.error?.code}")
+                }
+                Status.NETWORK -> {
+                    toast("Проблемы с подключением")
+                }
+            }
+        })
+    }
+
+    private fun checkNumberPhone() {
+        val notFormatNumber = binding.numberPhone.text.toString()
+        val formatNumber = notFormatNumber.replace(Regex("[^0-9]"), "")
+        if (notFormatNumber.isEmpty()) return
+        if (formatNumber.length != selectedCountry!!.phone_length.toInt()) {
+            binding.numberPhone.error = getString(R.string.wrong_format); return
+        }
+        viewModel.checkPhone(CheckPhoneBody(formatNumber)).observe(viewLifecycleOwner, {
+            val data = it.data
+            when (it.status) {
+                Status.SUCCESS -> {
+                    App.getRouter().navigateTo(Screens.AuthScreen(data?.result!!.id))
+                }
+                Status.ERROR -> {
+                    toast("error country ${data?.error?.code} ${data?.error?.message}")
+                }
+                Status.NETWORK -> {
+                    toast("Проблемы с подключением")
+                }
+            }
+        })
+    }
+
+    override fun countrySelected(country: CountryResult) {
+        inputMask.removeFromTextView()
+        binding.numberPhone.setText("")
+        val convertedSlots = country.phone_mask.replace(oldChar = '#', newChar = '_')
+        val slots = UnderscoreDigitSlotsParser().parseSlots(convertedSlots)
+        inputMask = MaskFormatWatcher(MaskImpl.createTerminated(slots))
+        inputMask.installOn(binding.numberPhone)
+        binding.countryDrop.setText(country.name)
+        selectedCountry = country
+        chooseFragment.dismiss()
+    }
+
+}

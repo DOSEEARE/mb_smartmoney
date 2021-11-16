@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.AuthFragment">
-
+    tools:context=".ui.login.auth.AuthFragment">
 
     <ImageButton
         android:id="@+id/back_btn"
@@ -17,76 +16,269 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/default_margin"
+        android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/back_btn">
 
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_bold"
-            android:gravity="center_horizontal"
-            android:text="@string/registration"
-            android:textSize="@dimen/title_size"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:text="@string/enter_number"
-            android:textSize="12sp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/input_height"
-            android:layout_marginTop="@dimen/default_margin"
-            app:boxStrokeWidth="0dp"
-            app:hintEnabled="false">
-
-            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/country_drop"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_horizontal"
+                android:text="@string/registration"
+                android:textSize="@dimen/title_size"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/name_et"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginTop="@dimen/default_margin"
                 android:background="@drawable/bg_input"
-                android:clickable="false"
-                android:drawableEnd="@drawable/ic_drop_down"
-                android:editable="false"
-                android:focusable="false"
-                android:hint="@string/country_code"
+                android:hint="@string/name"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
                 android:paddingStart="@dimen/default_margin"
-                android:paddingEnd="@dimen/small_margin"
                 android:textCursorDrawable="@drawable/bg_cursor_orange"
                 android:textSize="12sp" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/surname_et"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginTop="@dimen/default_margin"
+                android:background="@drawable/bg_input"
+                android:hint="@string/surname"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:paddingStart="@dimen/default_margin"
+                android:textCursorDrawable="@drawable/bg_cursor_orange"
+                android:textSize="12sp" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/number_phone"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/input_height"
-            android:layout_marginTop="@dimen/small_margin"
-            android:background="@drawable/bg_input"
-            android:hint="@string/number_phone"
-            android:paddingStart="@dimen/default_margin"
-            android:textSize="12sp" />
+            <EditText
+                android:id="@+id/second_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginTop="@dimen/default_margin"
+                android:background="@drawable/bg_input"
+                android:hint="@string/second_name"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:paddingStart="@dimen/default_margin"
+                android:textCursorDrawable="@drawable/bg_cursor_orange"
+                android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/next_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin"
-            android:background="@drawable/bg_default_btn"
-            android:foreground="?attr/selectableItemBackground"
-            android:text="@string/next"
-            android:textColor="@color/white" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                <EditText
+                    android:id="@+id/gender_db"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/input_height"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/small_margin"
+                    android:layout_weight="0.2"
+                    android:background="@drawable/bg_input"
+                    android:drawableEnd="@drawable/ic_drop_down"
+                    android:editable="false"
+                    android:paddingEnd="@dimen/small_margin"
+                    android:focusable="false"
+                    android:hint="@string/gender"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/default_margin"
+                    android:textCursorDrawable="@drawable/bg_cursor_orange"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/born_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/input_height"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_weight="0.8"
+                    android:background="@drawable/bg_input"
+                    android:drawableEnd="@drawable/ic_date"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/born_date"
+                    android:paddingStart="@dimen/default_margin"
+                    android:paddingEnd="@dimen/small_margin"
+                    android:textCursorDrawable="@drawable/bg_cursor_orange"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginTop="@dimen/default_margin"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/nationality_db"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_input"
+                    android:clickable="false"
+                    android:drawableEnd="@drawable/ic_drop_down"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/nationality"
+                    android:paddingStart="@dimen/default_margin"
+                    android:paddingEnd="@dimen/small_margin"
+                    android:textCursorDrawable="@drawable/bg_cursor_orange"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <EditText
+                android:id="@+id/number_phone_one"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginTop="@dimen/default_margin"
+                android:background="@drawable/bg_input"
+                android:editable="false"
+                android:focusable="false"
+                android:hint="@string/number_phone"
+                android:maxLines="1"
+                android:paddingStart="@dimen/default_margin"
+                android:textCursorDrawable="@drawable/bg_cursor_orange"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/number_phone_two"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginTop="@dimen/default_margin"
+                android:background="@drawable/bg_input"
+                android:hint="Доп. номер телефона"
+                android:maxLines="1"
+                android:paddingStart="@dimen/default_margin"
+                android:textCursorDrawable="@drawable/bg_cursor_orange"
+                android:textSize="12sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginTop="@dimen/default_margin"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/question_db"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_input"
+                    android:clickable="false"
+                    android:drawableEnd="@drawable/ic_drop_down"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/choose_question"
+                    android:paddingStart="@dimen/default_margin"
+                    android:paddingEnd="@dimen/small_margin"
+                    android:textCursorDrawable="@drawable/bg_cursor_orange"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <EditText
+                android:id="@+id/answer_question"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginTop="@dimen/default_margin"
+                android:background="@drawable/bg_input"
+                android:hint="@string/answer_question"
+                android:maxLines="1"
+                android:paddingStart="@dimen/default_margin"
+                android:textCursorDrawable="@drawable/bg_cursor_orange"
+                android:textSize="12sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:layout_marginTop="@dimen/default_margin"
+                app:boxStrokeWidth="0dp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/traffic_source_db"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_input"
+                    android:clickable="false"
+                    android:drawableEnd="@drawable/ic_drop_down"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/traffic_source"
+                    android:paddingStart="@dimen/default_margin"
+                    android:paddingEnd="@dimen/small_margin"
+                    android:textCursorDrawable="@drawable/bg_cursor_orange"
+                    android:textSize="12sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/agree_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:theme="@style/MyCheckBox"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/agree_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:text="@string/agree_with"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="@id/agree_cb"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/agree_cb"
+                    app:layout_constraintTop_toTopOf="@id/agree_cb" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/auth_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:background="@drawable/bg_default_btn"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/registration_now"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/registered_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center"
+                android:padding="@dimen/small_margin"
+                android:text="@string/already_registered"
+                android:textColor="@color/orange_main"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

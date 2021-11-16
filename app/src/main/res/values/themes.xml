@@ -52,4 +52,13 @@
     <style name="LoginInput" parent="Widget.AppCompat.EditText">
         <item name="android:textCursorDrawable">@drawable/bg_cursor_orange</item>
     </style>
+
+    <style name="CustomBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+    </style>
+
+    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>

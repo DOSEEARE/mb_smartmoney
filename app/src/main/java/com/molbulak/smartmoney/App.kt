@@ -10,10 +10,10 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
-class SmApp : Application() {
+class App : Application() {
 
     companion object {
-        lateinit var INSTANCE: SmApp
+        lateinit var INSTANCE: App
 
         fun getRouter(): Router {
             return INSTANCE.cicerone.router
@@ -28,7 +28,7 @@ class SmApp : Application() {
         cicerone = Cicerone.create()
         startKoin {
             androidLogger()
-            androidContext(this@SmApp)
+            androidContext(this@App)
             modules(viewModelModule)
         }
     }

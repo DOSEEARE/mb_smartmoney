@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.molbulak.smartmoney.SmApp
-import com.molbulak.smartmoney.cicerone.Screens
+import com.molbulak.smartmoney.App
+import com.molbulak.smartmoney.Screens
 import com.molbulak.smartmoney.databinding.FragmentLoginBinding
 import com.molbulak.smartmoney.extensions.toast
 import com.molbulak.smartmoney.service.network.Status
@@ -35,7 +35,7 @@ class LoginFragment : Fragment() {
 
     private fun initAuth() {
         binding.authButton.setOnClickListener {
-            SmApp.getRouter().navigateTo(Screens.AuthScreen())
+            App.getRouter().navigateTo(Screens.CheckNumberScreen())
         }
     }
 
@@ -57,13 +57,13 @@ class LoginFragment : Fragment() {
                         val result = it.data!!.result
                         Log.d("LoginFragment", "initViews: $result")
                         toast("success login ${result.token}")
-                        SmApp.getRouter().navigateTo(Screens.MainScreen())
+                        App.getRouter().navigateTo(Screens.MainScreen())
                     }
                     Status.ERROR -> {
                         toast("error login ${data!!.error.code}")
                     }
                     Status.NETWORK -> {
-                        toast("Интернет не работает братишка")
+                        toast("Проблемы с подключением")
                     }
                 }
             })

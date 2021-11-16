@@ -2,13 +2,13 @@ package com.molbulak.smartmoney.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.molbulak.smartmoney.databinding.ItemChooseCountryBinding
 import com.molbulak.smartmoney.service.network.response.country.CountryResult
 
 class ChooseCountryAdapter(
     private var countries: List<CountryResult>,
+    private var selectedCountry: CountryResult?,
     private var listener: SelectListener,
 ) :
     RecyclerView.Adapter<ChooseCountryAdapter.ChooseCountryViewHolder>() {
@@ -32,9 +32,14 @@ class ChooseCountryAdapter(
         fun bind(country: CountryResult) {
             binding.apply {
                 countryName.text = country.name
+                if (selectedCountry != null) {
+                    if (selectedCountry!!.name == country.name) {
+                        binding.countryRadioBtn.isChecked = true
+                    }
+                }
                 binding.root.setOnClickListener {
-                    Toast.makeText(binding.root.context, "clicked", Toast.LENGTH_SHORT).show()
-                    listener.countrySelected(country) }
+                    listener.countrySelected(country)
+                }
             }
         }
     }
