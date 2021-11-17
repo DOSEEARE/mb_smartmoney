@@ -46,23 +46,27 @@
                 android:background="@drawable/bg_input"
                 android:hint="@string/name"
                 android:imeOptions="actionNext"
+                android:inputType="text"
                 android:maxLines="1"
                 android:paddingStart="@dimen/default_margin"
+                android:paddingEnd="@dimen/small_margin"
                 android:textCursorDrawable="@drawable/bg_cursor_orange"
-                android:textSize="12sp" />
+                android:textSize="@dimen/small_text" />
 
             <EditText
                 android:id="@+id/surname_et"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/input_height"
                 android:layout_marginTop="@dimen/default_margin"
+                android:inputType="text"
                 android:background="@drawable/bg_input"
                 android:hint="@string/surname"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
                 android:paddingStart="@dimen/default_margin"
+                android:paddingEnd="@dimen/small_margin"
                 android:textCursorDrawable="@drawable/bg_cursor_orange"
-                android:textSize="12sp" />
+                android:textSize="@dimen/small_text" />
 
             <EditText
                 android:id="@+id/second_name_et"
@@ -70,12 +74,14 @@
                 android:layout_height="@dimen/input_height"
                 android:layout_marginTop="@dimen/default_margin"
                 android:background="@drawable/bg_input"
+                android:inputType="text"
                 android:hint="@string/second_name"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
                 android:paddingStart="@dimen/default_margin"
+                android:paddingEnd="@dimen/small_margin"
                 android:textCursorDrawable="@drawable/bg_cursor_orange"
-                android:textSize="12sp" />
+                android:textSize="@dimen/small_text" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -92,13 +98,13 @@
                     android:background="@drawable/bg_input"
                     android:drawableEnd="@drawable/ic_drop_down"
                     android:editable="false"
-                    android:paddingEnd="@dimen/small_margin"
                     android:focusable="false"
                     android:hint="@string/gender"
                     android:maxLines="1"
                     android:paddingStart="@dimen/default_margin"
+                    android:paddingEnd="@dimen/small_margin"
                     android:textCursorDrawable="@drawable/bg_cursor_orange"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/small_text" />
 
                 <EditText
                     android:id="@+id/born_date"
@@ -114,7 +120,7 @@
                     android:paddingStart="@dimen/default_margin"
                     android:paddingEnd="@dimen/small_margin"
                     android:textCursorDrawable="@drawable/bg_cursor_orange"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/small_text" />
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -137,7 +143,7 @@
                     android:paddingStart="@dimen/default_margin"
                     android:paddingEnd="@dimen/small_margin"
                     android:textCursorDrawable="@drawable/bg_cursor_orange"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/small_text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -152,8 +158,9 @@
                 android:hint="@string/number_phone"
                 android:maxLines="1"
                 android:paddingStart="@dimen/default_margin"
+                android:paddingEnd="@dimen/small_margin"
                 android:textCursorDrawable="@drawable/bg_cursor_orange"
-                android:textSize="12sp" />
+                android:textSize="@dimen/small_text" />
 
             <EditText
                 android:id="@+id/number_phone_two"
@@ -165,7 +172,7 @@
                 android:maxLines="1"
                 android:paddingStart="@dimen/default_margin"
                 android:textCursorDrawable="@drawable/bg_cursor_orange"
-                android:textSize="12sp" />
+                android:textSize="@dimen/small_text" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -187,7 +194,7 @@
                     android:paddingStart="@dimen/default_margin"
                     android:paddingEnd="@dimen/small_margin"
                     android:textCursorDrawable="@drawable/bg_cursor_orange"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/small_text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -200,32 +207,9 @@
                 android:hint="@string/answer_question"
                 android:maxLines="1"
                 android:paddingStart="@dimen/default_margin"
+                android:paddingEnd="@dimen/small_margin"
                 android:textCursorDrawable="@drawable/bg_cursor_orange"
-                android:textSize="12sp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/input_height"
-                android:layout_marginTop="@dimen/default_margin"
-                app:boxStrokeWidth="0dp"
-                app:hintEnabled="false">
-
-                <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                    android:id="@+id/traffic_source_db"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_input"
-                    android:clickable="false"
-                    android:drawableEnd="@drawable/ic_drop_down"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="@string/traffic_source"
-                    android:paddingStart="@dimen/default_margin"
-                    android:paddingEnd="@dimen/small_margin"
-                    android:textCursorDrawable="@drawable/bg_cursor_orange"
-                    android:textSize="12sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                android:textSize="@dimen/small_text" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

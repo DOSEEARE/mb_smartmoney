@@ -16,12 +16,16 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import ru.tinkoff.decoro.MaskImpl
+import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.Date
 
 
 object MyUtil {
@@ -34,6 +38,16 @@ object MyUtil {
 
     fun timeStamp(): Long {
         return System.currentTimeMillis() / 1000L
+    }
+
+    fun onlyDigits(string: String): String {
+        return string.replace(Regex("[^0-9]"), "")
+    }
+
+    fun inputMask(string: String): MaskFormatWatcher {
+        val slots =
+            UnderscoreDigitSlotsParser().parseSlots(string.replace(oldChar = '#', newChar = '_'))
+        return MaskFormatWatcher(MaskImpl.createTerminated(slots))
     }
 
     fun currentTime(): String {
@@ -57,6 +71,10 @@ object MyUtil {
             view = View(activity)
         }
         imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    fun checkDigit(number: Int): String {
+        return if (number <= 9) "0$number" else number.toString()
     }
 
     /*fun imageToBase64(filePath: String?): String {

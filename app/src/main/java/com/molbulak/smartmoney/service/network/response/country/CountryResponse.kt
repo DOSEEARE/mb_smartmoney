@@ -4,11 +4,11 @@ import com.molbulak.smartmoney.service.network.response.CrmError
 
 data class CountryResponse(
     val code: Int,
-    val result: List<CountryResult>?,
+    val result: List<Country>?,
     val error: CrmError?,
 )
 
-data class CountryResult(
+data class Country(
     val id: String,
     val iso_code: String,
     val name: String,

@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.molbulak.smartmoney.databinding.ItemChooseCountryBinding
-import com.molbulak.smartmoney.service.network.response.country.CountryResult
+import com.molbulak.smartmoney.service.network.response.country.Country
 
 class ChooseCountryAdapter(
-    private var countries: List<CountryResult>,
-    private var selectedCountry: CountryResult?,
+    private var countries: List<Country>,
+    private var selectedCountry: Country?,
     private var listener: SelectListener,
 ) :
     RecyclerView.Adapter<ChooseCountryAdapter.ChooseCountryViewHolder>() {
@@ -29,7 +29,7 @@ class ChooseCountryAdapter(
 
     inner class ChooseCountryViewHolder(private val binding: ItemChooseCountryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(country: CountryResult) {
+        fun bind(country: Country) {
             binding.apply {
                 countryName.text = country.name
                 if (selectedCountry != null) {
@@ -46,5 +46,5 @@ class ChooseCountryAdapter(
 }
 
 interface SelectListener {
-    fun countrySelected(country: CountryResult)
+    fun countrySelected(country: Country)
 }

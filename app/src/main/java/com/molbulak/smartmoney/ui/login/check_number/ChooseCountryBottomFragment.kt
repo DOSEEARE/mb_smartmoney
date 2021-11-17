@@ -9,12 +9,12 @@ import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.adapter.ChooseCountryAdapter
 import com.molbulak.smartmoney.adapter.SelectListener
 import com.molbulak.smartmoney.databinding.FragmentChooseBottomBinding
-import com.molbulak.smartmoney.service.network.response.country.CountryResult
+import com.molbulak.smartmoney.service.network.response.country.Country
 
 
 class ChooseCountryBottomFragment(
-    private val countries: List<CountryResult>,
-    private val selectedCountry: CountryResult?,
+    private val countries: List<Country>,
+    private val selectedCountry: Country?,
     private val listener: SelectListener,
 ) :
     BottomSheetDialogFragment() {

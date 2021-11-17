@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_margin"
         android:gravity="center"
-        android:text="@string/available_country_list"
         android:textSize="@dimen/title_size"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/born_date" />
 
     <View
         android:layout_width="match_parent"
@@ -24,13 +24,15 @@
         android:layout_marginTop="@dimen/default_margin"
         android:background="@color/gray" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/choose_rv"
+    <DatePicker
+        android:id="@+id/choose_date"
+        style="@style/SpinnerDatePicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_choose_country"/>
+        tools:listitem="@layout/item_choose_country" />
 
     <View
         android:layout_width="match_parent"
@@ -38,13 +40,13 @@
         android:background="@color/gray" />
 
     <Button
-        android:id="@+id/close_btn"
+        android:id="@+id/accept_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin"
         android:background="@drawable/bg_default_btn"
         android:foreground="?attr/selectableItemBackground"
-        android:text="@string/close"
+        android:text="@string/accept"
         android:textAllCaps="false"
         android:textColor="@color/white" />
 

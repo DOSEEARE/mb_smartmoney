@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.molbulak.smartmoney.databinding.ItemChooseCountryBinding
-import com.molbulak.smartmoney.service.network.response.country.CountryResult
 import com.molbulak.smartmoney.service.network.response.gender.Gender
 
 class ChooseGenderAdapter(

@@ -4,8 +4,12 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import com.molbulak.smartmoney.base.BaseViewModel
 import com.molbulak.smartmoney.service.network.Resource
+import com.molbulak.smartmoney.service.network.body.AuthBody
+import com.molbulak.smartmoney.service.network.body.CheckCodeBody
 import com.molbulak.smartmoney.service.network.body.CheckPhoneBody
 import com.molbulak.smartmoney.service.network.body.LoginBody
+import com.molbulak.smartmoney.service.network.response.AuthResponse
+import com.molbulak.smartmoney.service.network.response.check_code.CheckCodeResponse
 import com.molbulak.smartmoney.service.network.response.check_phone.CheckPhoneResponse
 import com.molbulak.smartmoney.service.network.response.country.CountryResponse
 import com.molbulak.smartmoney.service.network.response.gender.GenderResponse
@@ -27,6 +31,10 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
         return network.checkPhone(body)
     }
 
+    fun checkCode(body: CheckCodeBody): LiveData<Resource<CheckCodeResponse>> {
+        return network.checkCode(body)
+    }
+
     fun gender(): LiveData<Resource<GenderResponse>> {
         return network.gender()
     }
@@ -37,6 +45,10 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     fun question(): LiveData<Resource<QuestionResponse>> {
         return network.question()
+    }
+
+    fun auth(body: AuthBody): LiveData<Resource<AuthResponse>> {
+        return network.auth(body)
     }
 
 }

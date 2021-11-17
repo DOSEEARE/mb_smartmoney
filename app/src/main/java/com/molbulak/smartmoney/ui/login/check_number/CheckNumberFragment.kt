@@ -14,11 +14,11 @@ import com.molbulak.smartmoney.databinding.FragmentCheckNumberBinding
 import com.molbulak.smartmoney.extensions.toast
 import com.molbulak.smartmoney.service.network.Status
 import com.molbulak.smartmoney.service.network.body.CheckPhoneBody
-import com.molbulak.smartmoney.service.network.response.country.CountryResult
+import com.molbulak.smartmoney.service.network.response.country.Country
 import com.molbulak.smartmoney.ui.login.LoginViewModel
+import com.molbulak.smartmoney.util.MyUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.tinkoff.decoro.MaskImpl
-import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
 import ru.tinkoff.decoro.slots.PredefinedSlots
 import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 
@@ -27,8 +27,8 @@ class CheckNumberFragment : Fragment(), SelectListener {
     private lateinit var binding: FragmentCheckNumberBinding
     private lateinit var chooseFragment: ChooseCountryBottomFragment
     private val viewModel: LoginViewModel by viewModel()
-    private var availableCountries = listOf<CountryResult>()
-    private var selectedCountry: CountryResult? = null
+    private var availableCountries = listOf<Country>()
+    private var selectedCountry: Country? = null
 
     private var inputMask =
         MaskFormatWatcher(MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER))
@@ -77,7 +77,7 @@ class CheckNumberFragment : Fragment(), SelectListener {
 
     private fun checkNumberPhone() {
         val notFormatNumber = binding.numberPhone.text.toString()
-        val formatNumber = notFormatNumber.replace(Regex("[^0-9]"), "")
+        val formatNumber = MyUtil.onlyDigits(notFormatNumber)
         if (notFormatNumber.isEmpty()) return
         if (formatNumber.length != selectedCountry!!.phone_length.toInt()) {
             binding.numberPhone.error = getString(R.string.wrong_format); return
@@ -86,7 +86,12 @@ class CheckNumberFragment : Fragment(), SelectListener {
             val data = it.data
             when (it.status) {
                 Status.SUCCESS -> {
-                    App.getRouter().navigateTo(Screens.AuthScreen(data?.result!!.id))
+                    CheckCodeBF(data?.result!!.id, object : CheckCodeListener {
+                        override fun codeChecked() {
+                            App.getRouter()
+                                .navigateTo(Screens.AuthScreen(selectedCountry!!, notFormatNumber))
+                        }
+                    }).show(childFragmentManager, "CheckCodeBF")
                 }
                 Status.ERROR -> {
                     toast("error country ${data?.error?.code} ${data?.error?.message}")
@@ -98,12 +103,10 @@ class CheckNumberFragment : Fragment(), SelectListener {
         })
     }
 
-    override fun countrySelected(country: CountryResult) {
+    override fun countrySelected(country: Country) {
         inputMask.removeFromTextView()
         binding.numberPhone.setText("")
-        val convertedSlots = country.phone_mask.replace(oldChar = '#', newChar = '_')
-        val slots = UnderscoreDigitSlotsParser().parseSlots(convertedSlots)
-        inputMask = MaskFormatWatcher(MaskImpl.createTerminated(slots))
+        inputMask = MyUtil.inputMask(country.phone_mask)
         inputMask.installOn(binding.numberPhone)
         binding.countryDrop.setText(country.name)
         selectedCountry = country

@@ -61,4 +61,10 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="SpinnerDatePicker" parent="@android:style/Widget.DatePicker">
+        <item name="android:calendarViewShown">false</item>
+        <item name="android:datePickerMode">spinner</item>
+        <item name="colorControlNormal">@color/orange_main</item>
+    </style>
+
 </resources>

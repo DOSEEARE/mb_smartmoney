@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_choose_country"
+    android:orientation="vertical"
+    tools:context=".ui.login.check_number.ChooseCountryBottomFragment">
+
+    <TextView
+        android:id="@+id/choose_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:gravity="center"
+        android:text="@string/success_check_number"
+        android:textSize="@dimen/small_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/sms_et"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:layout_marginHorizontal="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:background="@drawable/bg_input"
+        android:hint="@string/sms_code_example"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLines="1"
+        android:paddingStart="@dimen/default_margin"
+        android:paddingEnd="@dimen/small_margin"
+        android:textCursorDrawable="@drawable/bg_cursor_orange"
+        android:textSize="@dimen/small_text" />
+
+    <TextView
+        android:id="@+id/wrong_indicator_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/default_margin"
+        android:layout_marginTop="13dp"
+        android:drawableStart="@drawable/ic_warning"
+        android:drawablePadding="6dp"
+        android:text="@string/wrong_sms_code"
+        android:textColor="@color/red"
+        android:textSize="10sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+
+
+    <Button
+        android:id="@+id/accept_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:background="@drawable/bg_default_btn"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="Продолжить"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/no_sms_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/small_margin"
+        android:text="Я не получил код"
+        android:textColor="@color/orange_main" />
+</LinearLayout>

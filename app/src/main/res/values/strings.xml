@@ -36,4 +36,9 @@
     <string name="nationality">Национальность</string>
     <string name="traffic_source">Где вы узнали о нас</string>
     <string name="choose_gender">Выберите пол</string>
+    <string name="warning_empty">Обязательное поле</string>
+    <string name="accept">Подтвердить</string>
+    <string name="success_check_number">Вы успешно прошли регистрацию. Введите код из смс поле ниже и нажмите "Продолжить".</string>
+    <string name="sms_code_example">1234</string>
+    <string name="wrong_sms_code">Неверный смс код</string>
 </resources>

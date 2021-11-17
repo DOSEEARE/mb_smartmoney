@@ -6,4 +6,5 @@
     <color name="text_bold">#202020</color>
     <color name="text_default">#404040</color>
     <color name="gray">#CDCDCD</color>
+    <color name="red">#FF0000</color>
 </resources>

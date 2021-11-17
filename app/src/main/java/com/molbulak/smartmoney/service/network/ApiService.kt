@@ -1,5 +1,7 @@
 package com.molbulak.smartmoney.service.network
 
+import com.molbulak.smartmoney.service.network.response.AuthResponse
+import com.molbulak.smartmoney.service.network.response.check_code.CheckCodeResponse
 import com.molbulak.smartmoney.service.network.response.check_phone.CheckPhoneResponse
 import com.molbulak.smartmoney.service.network.response.country.CountryResponse
 import com.molbulak.smartmoney.service.network.response.gender.GenderResponse
@@ -22,21 +24,30 @@ interface ApiService {
     suspend fun availableCountry()
             : Response<CountryResponse>
 
-    @GET("checkPhone/")
+    @POST("checkPhone/")
     suspend fun checkPhone(@Body checkPhoneBody: MultipartBody)
             : Response<CheckPhoneResponse>
 
-    @GET("listGender/")
-    suspend fun gender(@Body genderBody : MultipartBody)
+    @POST("checkCode/")
+    suspend fun checkCode(@Body checkPhoneBody: MultipartBody)
+            : Response<CheckCodeResponse>
+
+    @POST("listGender/")
+    suspend fun gender(@Body genderBody: MultipartBody)
             : Response<GenderResponse>
 
-    @GET("listNationality/")
-    suspend fun nationality(@Body genderBody : MultipartBody)
+    @POST("listNationality/")
+    suspend fun nationality(@Body genderBody: MultipartBody)
             : Response<NationalityResponse>
 
-    @GET("listSecretQuestion/")
-    suspend fun question(@Body genderBody : MultipartBody)
+    @POST("listSecretQuestion/")
+    suspend fun question(@Body genderBody: MultipartBody)
             : Response<QuestionResponse>
+
+    @POST("registration/")
+    suspend fun auth(@Body genderBody: MultipartBody)
+            : Response<AuthResponse>
+
 
 /*
     @POST("login")
