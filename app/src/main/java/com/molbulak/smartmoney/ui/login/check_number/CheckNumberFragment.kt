@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.molbulak.smartmoney.App
 import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
-import com.molbulak.smartmoney.adapter.SelectListener
+import com.molbulak.smartmoney.adapter.SelectCountryListener
 import com.molbulak.smartmoney.databinding.FragmentCheckNumberBinding
 import com.molbulak.smartmoney.extensions.toast
 import com.molbulak.smartmoney.service.network.Status
@@ -23,9 +23,9 @@ import ru.tinkoff.decoro.slots.PredefinedSlots
 import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 
 
-class CheckNumberFragment : Fragment(), SelectListener {
+class CheckNumberFragment : Fragment(), SelectCountryListener {
     private lateinit var binding: FragmentCheckNumberBinding
-    private lateinit var chooseFragment: ChooseCountryBottomFragment
+    private lateinit var chooseFragment: ChooseCountryBF
     private val viewModel: LoginViewModel by viewModel()
     private var availableCountries = listOf<Country>()
     private var selectedCountry: Country? = null
@@ -53,7 +53,7 @@ class CheckNumberFragment : Fragment(), SelectListener {
 
 
     private fun initAvailableCountries() {
-        chooseFragment = ChooseCountryBottomFragment(availableCountries, selectedCountry, this)
+        chooseFragment = ChooseCountryBF(availableCountries, selectedCountry, this)
         viewModel.availableCountry().observe(viewLifecycleOwner, {
             val data = it.data
             when (it.status) {
@@ -61,7 +61,7 @@ class CheckNumberFragment : Fragment(), SelectListener {
                     availableCountries = (it.data?.result!!)
                     binding.countryDrop.setOnClickListener {
                         chooseFragment =
-                            ChooseCountryBottomFragment(availableCountries, selectedCountry, this)
+                            ChooseCountryBF(availableCountries, selectedCountry, this)
                         chooseFragment.show(childFragmentManager, "ChooseCountryBottomFragment")
                     }
                 }
@@ -86,12 +86,10 @@ class CheckNumberFragment : Fragment(), SelectListener {
             val data = it.data
             when (it.status) {
                 Status.SUCCESS -> {
-                    CheckCodeBF(data?.result!!.id, object : CheckCodeListener {
-                        override fun codeChecked() {
-                            App.getRouter()
-                                .navigateTo(Screens.AuthScreen(selectedCountry!!, notFormatNumber))
-                        }
-                    }).show(childFragmentManager, "CheckCodeBF")
+                    CheckCodeBF(data?.result!!.id) {
+                        App.getRouter()
+                            .navigateTo(Screens.AuthScreen(selectedCountry!!, notFormatNumber))
+                    }.show(childFragmentManager, "CheckCodeBF")
                 }
                 Status.ERROR -> {
                     toast("error country ${data?.error?.code} ${data?.error?.message}")

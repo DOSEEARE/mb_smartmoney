@@ -8,6 +8,7 @@ import com.molbulak.smartmoney.service.network.response.gender.GenderResponse
 import com.molbulak.smartmoney.service.network.response.login.LoginResponse
 import com.molbulak.smartmoney.service.network.response.nationality.NationalityResponse
 import com.molbulak.smartmoney.service.network.response.question.QuestionResponse
+import com.molbulak.smartmoney.service.network.response.restore.RestoreResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -48,6 +49,9 @@ interface ApiService {
     suspend fun auth(@Body genderBody: MultipartBody)
             : Response<AuthResponse>
 
+    @POST("recoveryAccess/")
+    suspend fun restore(@Body genderBody: MultipartBody)
+            : Response<RestoreResponse>
 
 /*
     @POST("login")

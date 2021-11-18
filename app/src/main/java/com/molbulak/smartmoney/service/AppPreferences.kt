@@ -23,10 +23,10 @@ object AppPreferences {
     }
 
 
-    var accessToken: String
-        get() = preferences.getString("accessToken", "")!!
+    var token: String
+        get() = preferences.getString("token", "")!!
         set(value) = preferences.edit {
-            it.putString("accessToken", value)
+            it.putString("token", value)
         }
 
     var currentCoordinate: String?
@@ -39,5 +39,11 @@ object AppPreferences {
         get() = preferences.getString("userLogin", "")!!
         set(value) = preferences.edit {
             it.putString("userLogin", value)
+        }
+
+    var isLogined: Boolean
+        get() = preferences.getBoolean("isAuthed", false)
+        set(value) = preferences.edit {
+            it.putBoolean("isAuthed", value)
         }
 }

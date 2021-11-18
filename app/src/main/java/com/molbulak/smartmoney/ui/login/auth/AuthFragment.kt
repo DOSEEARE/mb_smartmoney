@@ -13,6 +13,7 @@ import com.molbulak.smartmoney.adapter.SelectGenderListener
 import com.molbulak.smartmoney.adapter.SelectNationListener
 import com.molbulak.smartmoney.adapter.SelectQuestionListener
 import com.molbulak.smartmoney.databinding.FragmentAuthBinding
+import com.molbulak.smartmoney.extensions.parentActivity
 import com.molbulak.smartmoney.extensions.toast
 import com.molbulak.smartmoney.service.network.Status
 import com.molbulak.smartmoney.service.network.body.AuthBody
@@ -20,6 +21,7 @@ import com.molbulak.smartmoney.service.network.response.country.Country
 import com.molbulak.smartmoney.service.network.response.gender.Gender
 import com.molbulak.smartmoney.service.network.response.nationality.Nation
 import com.molbulak.smartmoney.service.network.response.question.Question
+import com.molbulak.smartmoney.ui.login.LoginHostActivity
 import com.molbulak.smartmoney.ui.login.LoginViewModel
 import com.molbulak.smartmoney.util.Date
 import com.molbulak.smartmoney.util.MyUtil
@@ -187,7 +189,13 @@ class AuthFragment(val country: Country, val numberPhone: String) :
         viewModel.auth(authBody).observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
-                    toast("Успешно регистрация ${it.data!!.result?.code}")
+                    parentActivity<LoginHostActivity>().showSuccess(
+                        getString(R.string.success_auth),
+                        getString(R.string.loginpas_sms),
+                        getString(R.string.accept)) { dialog ->
+                        dialog.dismiss()
+                        App.getRouter().newRootScreen(Screens.LoginScreen())
+                    }
                 }
                 Status.ERROR -> {
                     toast("Ошибка регистрация ${it.data!!.error?.code}")

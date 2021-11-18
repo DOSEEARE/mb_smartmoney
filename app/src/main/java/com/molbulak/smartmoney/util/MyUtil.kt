@@ -2,6 +2,7 @@ package com.molbulak.smartmoney.util
 
 import android.Manifest
 import android.app.Activity
+import android.app.KeyguardManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -42,6 +43,18 @@ object MyUtil {
 
     fun onlyDigits(string: String): String {
         return string.replace(Regex("[^0-9]"), "")
+    }
+
+
+    fun checkBiometricSupport(context: Context): Boolean {
+        if (ActivityCompat.checkSelfPermission(context,
+                Manifest.permission.USE_BIOMETRIC) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return false
+        }
+        return if (context.packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
+            true
+        } else true
     }
 
     fun inputMask(string: String): MaskFormatWatcher {

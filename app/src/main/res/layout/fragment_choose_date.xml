@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_choose_country"
     android:orientation="vertical"
-    tools:context=".ui.login.check_number.ChooseCountryBottomFragment">
+    tools:context=".ui.login.check_number.ChooseCountryBF">
 
     <TextView
         android:id="@+id/choose_title"
@@ -29,7 +29,7 @@
         style="@style/SpinnerDatePicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:calendarTextColor="@color/text_default"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_choose_country" />

@@ -41,4 +41,12 @@
     <string name="success_check_number">Вы успешно прошли регистрацию. Введите код из смс поле ниже и нажмите "Продолжить".</string>
     <string name="sms_code_example">1234</string>
     <string name="wrong_sms_code">Неверный смс код</string>
+    <string name="restore_password">Восстановление пароля</string>
+    <string name="secret_word">Кодове слово</string>
+    <string name="success_credit">Спасибо! \nВы успешно заполнили заявку на заём \n\nВ течение 24 часа Вам придет уведомление о решении</string>
+    <string name="accept_report">Ваша заявка получена</string>
+    <string name="ready">Готово</string>
+    <string name="success_auth">Вы успешно прошли регистрацию!</string>
+    <string name="loginpas_sms">Логин и пароль будут высланы Вам по смс</string>
+    <string name="success_restore">Доступ успешно восстановлен</string>
 </resources>

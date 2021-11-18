@@ -9,7 +9,7 @@ import com.molbulak.smartmoney.service.network.response.country.Country
 class ChooseCountryAdapter(
     private var countries: List<Country>,
     private var selectedCountry: Country?,
-    private var listener: SelectListener,
+    private var countryListener: SelectCountryListener,
 ) :
     RecyclerView.Adapter<ChooseCountryAdapter.ChooseCountryViewHolder>() {
 
@@ -38,13 +38,13 @@ class ChooseCountryAdapter(
                     }
                 }
                 binding.root.setOnClickListener {
-                    listener.countrySelected(country)
+                    countryListener.countrySelected(country)
                 }
             }
         }
     }
 }
 
-interface SelectListener {
+interface SelectCountryListener {
     fun countrySelected(country: Country)
 }

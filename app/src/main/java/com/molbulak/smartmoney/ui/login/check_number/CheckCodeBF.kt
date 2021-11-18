@@ -67,6 +67,6 @@ class CheckCodeBF(
     }
 }
 
-interface CheckCodeListener {
+fun interface CheckCodeListener {
     fun codeChecked()
 }

@@ -8,6 +8,7 @@ import com.molbulak.smartmoney.ui.login.LoginFragment
 import com.molbulak.smartmoney.ui.login.LoginHostActivity
 import com.molbulak.smartmoney.ui.login.auth.AuthFragment
 import com.molbulak.smartmoney.ui.login.check_number.CheckNumberFragment
+import com.molbulak.smartmoney.ui.login.restore.RestoreFragment
 
 object Screens {
     fun LoginHostScreen() = ActivityScreen {
@@ -26,8 +27,12 @@ object Screens {
         CheckNumberFragment()
     }
 
-    fun AuthScreen(country: Country, numberPhone : String) = FragmentScreen {
+    fun AuthScreen(country: Country, numberPhone: String) = FragmentScreen {
         AuthFragment(country, numberPhone)
+    }
+
+    fun RestoreScreen() = FragmentScreen {
+        RestoreFragment()
     }
 
 }

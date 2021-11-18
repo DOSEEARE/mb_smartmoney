@@ -2,10 +2,7 @@ package com.molbulak.smartmoney.service.network
 
 import android.content.Context
 import androidx.lifecycle.liveData
-import com.molbulak.smartmoney.service.network.body.AuthBody
-import com.molbulak.smartmoney.service.network.body.CheckCodeBody
-import com.molbulak.smartmoney.service.network.body.CheckPhoneBody
-import com.molbulak.smartmoney.service.network.body.LoginBody
+import com.molbulak.smartmoney.service.network.body.*
 import kotlinx.coroutines.Dispatchers
 import okhttp3.MultipartBody
 
@@ -256,6 +253,44 @@ class NetworkRepository(private val context: Context) {
                 build()
             }
             val response = RetrofitClient().apiService().auth(formData)
+            when {
+                response.isSuccessful -> {
+                    val crmCode = response.body()?.code
+                    val response = response.body()
+                    if (crmCode in 200..300) {
+                        if (response?.result != null) {
+                            emit(Resource.success(
+                                data = response,
+                                msg = "",
+                                code = response.code))
+                        }
+                        if (response?.error != null) {
+                            emit(Resource.error(
+                                data = response,
+                                msg = response.error.message,
+                                code = response.error.code))
+                        }
+                    }
+                }
+                else -> {
+                    response.raw().request.url
+                    emit(Resource.error(null, response.message(), response.code()))
+                }
+            }
+        } catch (e: Exception) {
+            emit(Resource.network(null, "Проблемы с подключением интернета", 0))
+        }
+    }
+
+    fun restore(body: RestoreBody) = liveData(Dispatchers.IO) {
+        try {
+            val formData = MultipartBody.Builder().run {
+                setType(MultipartBody.FORM)
+                addFormDataPart("phone", body.phone)
+                addFormDataPart("response", body.response)
+                build()
+            }
+            val response = RetrofitClient().apiService().restore(formData)
             when {
                 response.isSuccessful -> {
                     val crmCode = response.body()?.code

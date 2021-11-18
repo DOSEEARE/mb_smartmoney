@@ -17,3 +17,5 @@ fun <T> LiveData<T>.observeOnce(owner: LifecycleOwner, observer: (T) -> Unit) {
         }
     })
 }
+
+

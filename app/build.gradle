@@ -88,6 +88,10 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp"
 
     //Tinkoff input mask
-    implementation "ru.tinkoff.decoro:decoro:1.1.1"
+    def inputMask = "1.1.1"
+    implementation "ru.tinkoff.decoro:decoro:$inputMask"
+
+    def biometric = "1.0.1"
+    implementation "androidx.biometric:biometric:$biometric"
 
 }
