@@ -5,7 +5,8 @@ import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.molbulak.smartmoney.di.viewModelModule
-import com.molbulak.smartmoney.service.AppPreferences
+import com.molbulak.smartmoney.service.preference.AppPreferences
+import com.molbulak.smartmoney.service.preference.EncryptedPreferences
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -24,6 +25,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         AppPreferences.init(this)
+        EncryptedPreferences.init(this)
+
         INSTANCE = this
         cicerone = Cicerone.create()
         startKoin {

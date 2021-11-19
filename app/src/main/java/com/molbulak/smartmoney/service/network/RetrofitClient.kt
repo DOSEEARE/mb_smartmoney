@@ -1,7 +1,7 @@
 package com.molbulak.smartmoney.service.network
 
 import android.util.Log
-import com.molbulak.smartmoney.service.AppPreferences
+import com.molbulak.smartmoney.service.preference.AppPreferences
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

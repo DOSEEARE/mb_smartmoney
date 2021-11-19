@@ -15,7 +15,7 @@ import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
 import com.molbulak.smartmoney.databinding.ActivityAuthHostBinding
 import com.molbulak.smartmoney.databinding.AlertSuccessBinding
-import com.molbulak.smartmoney.service.AppPreferences
+import com.molbulak.smartmoney.service.preference.AppPreferences
 import com.molbulak.smartmoney.util.ClickListener
 
 class LoginHostActivity : AppCompatActivity() {
@@ -42,13 +42,9 @@ class LoginHostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthHostBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (AppPreferences.isLogined) {
-            App.getRouter().newRootScreen(Screens.MainScreen())
-        } else {
-            if (savedInstanceState == null && !AppPreferences.isLogined) {
+            if (savedInstanceState == null) {
                 navigator.applyCommands(arrayOf<Command>(Replace(Screens.LoginScreen())))
             }
-        }
     }
 
     override fun onResumeFragments() {

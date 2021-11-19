@@ -52,18 +52,4 @@ interface ApiService {
     @POST("recoveryAccess/")
     suspend fun restore(@Body genderBody: MultipartBody)
             : Response<RestoreResponse>
-
-/*
-    @POST("login")
-    suspend fun login(@Query("token") token: String, @Body loginBody: LoginBody)
-            : Response<CrmResponse<LoginResponse>>
-
-    @GET("vehicle")
-    suspend fun getVehicle(@Query("o") organisationId: Int): Response<VehicleResponse>
-
-    @GET("breakdown_type?page=all")
-    suspend fun getBreakDownTypes(): Response<BreakDownResponse>
-
-    @GET("failure_reason?page=all")
-    suspend fun getFailReason(): Response<FailureReasonResponse>*/
 }

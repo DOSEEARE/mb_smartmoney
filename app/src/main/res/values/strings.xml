@@ -49,4 +49,7 @@
     <string name="success_auth">Вы успешно прошли регистрацию!</string>
     <string name="loginpas_sms">Логин и пароль будут высланы Вам по смс</string>
     <string name="success_restore">Доступ успешно восстановлен</string>
+    <string name="fingerprint_title">Вход по отпечаткам пальца</string>
+    <string name="cancel">Отменить</string>
+    <string name="fingerprint_login">Войти с помощью отпечатки пальцев</string>
 </resources>

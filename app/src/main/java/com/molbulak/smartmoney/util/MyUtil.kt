@@ -86,6 +86,7 @@ object MyUtil {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
+
     fun checkDigit(number: Int): String {
         return if (number <= 9) "0$number" else number.toString()
     }

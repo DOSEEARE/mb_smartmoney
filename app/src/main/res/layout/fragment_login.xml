@@ -74,6 +74,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
+            android:id="@+id/remember_login_cb"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginTop="@dimen/default_margin"
@@ -81,6 +82,7 @@
             android:theme="@style/MyCheckBox" />
 
         <CheckBox
+            android:id="@+id/use_pin_cb"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginTop="@dimen/small_margin"
@@ -88,6 +90,7 @@
             android:theme="@style/MyCheckBox" />
 
         <CheckBox
+            android:id="@+id/use_fingerprint_cb"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginTop="@dimen/small_margin"

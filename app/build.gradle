@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.molbulak.smartmoney"
-        minSdk 21
+        minSdk 23
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -91,7 +91,10 @@ dependencies {
     def inputMask = "1.1.1"
     implementation "ru.tinkoff.decoro:decoro:$inputMask"
 
-    def biometric = "1.0.1"
+    def biometric = "1.1.0"
     implementation "androidx.biometric:biometric:$biometric"
+
+    def crypto_pref = "1.0.0"
+    implementation "androidx.security:security-crypto:$crypto_pref"
 
 }

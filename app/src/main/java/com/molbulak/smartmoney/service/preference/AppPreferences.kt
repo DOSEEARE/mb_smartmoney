@@ -1,4 +1,4 @@
-package com.molbulak.smartmoney.service
+package com.molbulak.smartmoney.service.preference
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -45,5 +45,20 @@ object AppPreferences {
         get() = preferences.getBoolean("isAuthed", false)
         set(value) = preferences.edit {
             it.putBoolean("isAuthed", value)
+        }
+    var rememberLogin: Boolean
+        get() = preferences.getBoolean("rememberLogin", false)
+        set(value) = preferences.edit {
+            it.putBoolean("rememberLogin", value)
+        }
+    var usePinCode: Boolean
+        get() = preferences.getBoolean("usePinCode", false)
+        set(value) = preferences.edit {
+            it.putBoolean("usePinCode", value)
+        }
+    var useFingerprint: Boolean
+        get() = preferences.getBoolean("useFingerprint", false)
+        set(value) = preferences.edit {
+            it.putBoolean("useFingerprint", value)
         }
 }
