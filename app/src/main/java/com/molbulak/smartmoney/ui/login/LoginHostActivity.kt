@@ -15,7 +15,7 @@ import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
 import com.molbulak.smartmoney.databinding.ActivityAuthHostBinding
 import com.molbulak.smartmoney.databinding.AlertSuccessBinding
-import com.molbulak.smartmoney.service.preference.AppPreferences
+import com.molbulak.smartmoney.databinding.DialogLoadingBinding
 import com.molbulak.smartmoney.util.ClickListener
 
 class LoginHostActivity : AppCompatActivity() {
@@ -37,14 +37,16 @@ class LoginHostActivity : AppCompatActivity() {
 
     }
     private lateinit var binding: ActivityAuthHostBinding
+    private lateinit var loadingDialog : Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthHostBinding.inflate(layoutInflater)
+        loadingDialog = Dialog(this)
         setContentView(binding.root)
-            if (savedInstanceState == null) {
-                navigator.applyCommands(arrayOf<Command>(Replace(Screens.LoginScreen())))
-            }
+        if (savedInstanceState == null) {
+            navigator.applyCommands(arrayOf<Command>(Replace(Screens.LoginScreen())))
+        }
     }
 
     override fun onResumeFragments() {
@@ -75,5 +77,18 @@ class LoginHostActivity : AppCompatActivity() {
         //<---------set view top of this------------->
         dialog.setContentView(binding.root)
         dialog.show()
+    }
+
+    fun showLoading() {
+        loadingDialog = Dialog(this)
+        loadingDialog.window?.setBackgroundDrawableResource(android.R.color.transparent);
+        loadingDialog.setCancelable(false)
+        val binding: DialogLoadingBinding = DialogLoadingBinding.inflate(LayoutInflater.from(this))
+        loadingDialog.setContentView(binding.root)
+        loadingDialog.show()
+    }
+
+    fun hideLoading() {
+        loadingDialog.dismiss()
     }
 }

@@ -7,7 +7,7 @@
     <string name="enter">Вход</string>
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
-    <string name="remember_password">Запомнить пароль</string>
+    <string name="remember_login">Запомнить логинь</string>
     <string name="login_by_code">Вход по пин-коду</string>
     <string name="login_by_fingerprint">Вход с помощью отпечатка</string>
     <string name="forgot_password">Забыли пароль ?</string>
@@ -52,4 +52,7 @@
     <string name="fingerprint_title">Вход по отпечаткам пальца</string>
     <string name="cancel">Отменить</string>
     <string name="fingerprint_login">Войти с помощью отпечатки пальцев</string>
+    <string name="pin_code">Пин-код</string>
+    <string name="repeat_pin_code">Повторите пин-код</string>
+    <string name="continue_">Продолжить</string>
 </resources>

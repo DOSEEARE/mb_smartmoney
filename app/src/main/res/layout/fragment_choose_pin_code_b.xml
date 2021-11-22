@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_choose_country"
+    tools:context=".ui.login.check_number.ChooseCountryBF">
+
+    <ImageView
+        android:id="@+id/close_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:src="@drawable/ic_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/close_btn">
+
+        <TextView
+            android:id="@+id/choose_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/available_country_list"
+            android:textSize="@dimen/title_size"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:gravity="center"
+            android:text="Выберите пон-код из 4-х цифр, чтобы вам было проще заходить в приложение в будущем."
+            android:textSize="@dimen/small_text" />
+
+        <EditText
+            android:id="@+id/pin_code"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_height"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:background="@drawable/bg_input"
+            android:hint="@string/pin_code"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="4"
+            android:maxLines="1"
+            android:paddingStart="@dimen/default_margin"
+            android:paddingEnd="@dimen/small_margin"
+            android:textCursorDrawable="@drawable/bg_cursor_orange"
+            android:textSize="@dimen/small_text" />
+
+        <EditText
+            android:id="@+id/repeat_pin_code"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/input_height"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
+            android:background="@drawable/bg_input"
+            android:hint="@string/repeat_pin_code"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="4"
+            android:maxLines="1"
+            android:paddingStart="@dimen/default_margin"
+            android:paddingEnd="@dimen/small_margin"
+            android:textCursorDrawable="@drawable/bg_cursor_orange"
+            android:textSize="@dimen/small_text" />
+
+        <Button
+            android:id="@+id/continue_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:background="@drawable/bg_default_btn"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="@string/continue_"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

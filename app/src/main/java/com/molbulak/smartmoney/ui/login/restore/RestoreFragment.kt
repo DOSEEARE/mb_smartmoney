@@ -55,12 +55,14 @@ class RestoreFragment : Fragment(), SelectCountryListener {
     }
 
     private fun initRestore() {
+        parentActivity<LoginHostActivity>().showLoading()
         val number = MyUtil.onlyDigits(binding.numberPhone.text.toString())
         val secretWord = binding.secretWord.text.toString()
         val body = RestoreBody(number, secretWord)
         viewModel.restore(body).observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
+                    parentActivity<LoginHostActivity>().hideLoading()
                     parentActivity<LoginHostActivity>().showSuccess(
                         getString(R.string.success_restore),
                         getString(R.string.loginpas_sms),
@@ -71,9 +73,11 @@ class RestoreFragment : Fragment(), SelectCountryListener {
                     toast("restore success ${it.data!!.error?.code}")
                 }
                 Status.ERROR -> {
+                    parentActivity<LoginHostActivity>().hideLoading()
                     toast("restore error ${it.data!!.error?.code}")
                 }
                 Status.NETWORK -> {
+                    parentActivity<LoginHostActivity>().hideLoading()
                     toast("Проблемы с подключением")
                 }
             }

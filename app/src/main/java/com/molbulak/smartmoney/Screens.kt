@@ -4,7 +4,7 @@ import android.content.Intent
 import com.github.terrakok.cicerone.androidx.ActivityScreen
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.molbulak.smartmoney.service.network.response.country.Country
-import com.molbulak.smartmoney.ui.login.LoginFragment
+import com.molbulak.smartmoney.ui.login.login.LoginFragment
 import com.molbulak.smartmoney.ui.login.LoginHostActivity
 import com.molbulak.smartmoney.ui.login.auth.AuthFragment
 import com.molbulak.smartmoney.ui.login.check_number.CheckNumberFragment

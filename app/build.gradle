@@ -97,4 +97,6 @@ dependencies {
     def crypto_pref = "1.0.0"
     implementation "androidx.security:security-crypto:$crypto_pref"
 
+    def lottie = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottie"
 }

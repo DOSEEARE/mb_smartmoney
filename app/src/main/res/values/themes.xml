@@ -8,7 +8,7 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/text_default</item>
         <item name="colorSecondaryVariant">@color/text_default</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/orange_main</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="android:fontFamily">@font/inter_medium</item>
@@ -29,7 +29,7 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/text_default</item>
         <item name="colorSecondaryVariant">@color/text_default</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/orange_main</item>
         <item name="android:textColor">@color/text_default</item>
         <item name="checkboxStyle">@style/MyCheckBox</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>

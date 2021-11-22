@@ -11,10 +11,12 @@ import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
 import com.molbulak.smartmoney.adapter.SelectCountryListener
 import com.molbulak.smartmoney.databinding.FragmentCheckNumberBinding
+import com.molbulak.smartmoney.extensions.parentActivity
 import com.molbulak.smartmoney.extensions.toast
 import com.molbulak.smartmoney.service.network.Status
 import com.molbulak.smartmoney.service.network.body.CheckPhoneBody
 import com.molbulak.smartmoney.service.network.response.country.Country
+import com.molbulak.smartmoney.ui.login.LoginHostActivity
 import com.molbulak.smartmoney.ui.login.LoginViewModel
 import com.molbulak.smartmoney.util.MyUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -53,11 +55,13 @@ class CheckNumberFragment : Fragment(), SelectCountryListener {
 
 
     private fun initAvailableCountries() {
+        parentActivity<LoginHostActivity>().showLoading()
         chooseFragment = ChooseCountryBF(availableCountries, selectedCountry, this)
         viewModel.availableCountry().observe(viewLifecycleOwner, {
             val data = it.data
             when (it.status) {
                 Status.SUCCESS -> {
+                    parentActivity<LoginHostActivity>().hideLoading()
                     availableCountries = (it.data?.result!!)
                     binding.countryDrop.setOnClickListener {
                         chooseFragment =
@@ -66,9 +70,11 @@ class CheckNumberFragment : Fragment(), SelectCountryListener {
                     }
                 }
                 Status.ERROR -> {
+                    parentActivity<LoginHostActivity>().hideLoading()
                     toast("error country ${data!!.error?.code}")
                 }
                 Status.NETWORK -> {
+                    parentActivity<LoginHostActivity>().hideLoading()
                     toast("Проблемы с подключением")
                 }
             }
@@ -76,6 +82,7 @@ class CheckNumberFragment : Fragment(), SelectCountryListener {
     }
 
     private fun checkNumberPhone() {
+        parentActivity<LoginHostActivity>().showLoading()
         val notFormatNumber = binding.numberPhone.text.toString()
         val formatNumber = MyUtil.onlyDigits(notFormatNumber)
         if (notFormatNumber.isEmpty()) return
@@ -98,6 +105,7 @@ class CheckNumberFragment : Fragment(), SelectCountryListener {
                     toast("Проблемы с подключением")
                 }
             }
+            parentActivity<LoginHostActivity>().hideLoading()
         })
     }
 

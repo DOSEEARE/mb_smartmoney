@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_choose_country"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/default_margin"
+    tools:context=".ui.login.check_number.ChooseCountryBF">
+
+    <TextView
+        android:id="@+id/choose_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        android:gravity="center"
+        android:text="Ввод кода доступа"
+        android:textColor="@color/orange_main"
+        android:textSize="@dimen/small_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.molbulak.smartmoney.custom.passwordview.PasswordView
+        android:id="@+id/pin_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:password_correct_color="#00A54E"
+        app:password_count="4"
+        app:password_incorrect_color="#D51731"
+        app:password_outline_color="@color/orange_main" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/default_margin"
+        android:columnCount="3"
+        android:orientation="vertical"
+        android:rowCount="4">
+
+        <Button
+            android:id="@+id/pin_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="1"
+            android:textColor="@color/orange_main"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/pin_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="4"
+            android:textColor="@color/orange_main"
+            android:textSize="24sp"
+
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/pin_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="7"
+            android:textColor="@color/orange_main"
+            android:textSize="24sp"
+
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/pin_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="Отмена"
+            android:textAllCaps="false"
+            android:textColor="@color/orange_main"
+            android:textSize="@dimen/small_text"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/pin_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="2"
+            android:textColor="@color/orange_main"
+            android:textSize="24sp"
+
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/pin_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="5"
+            android:textColor="@color/orange_main"
+            android:textSize="24sp"
+
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/pin_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="8"
+            android:textColor="@color/orange_main"
+            android:textSize="24sp"
+
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/pin_0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="0"
+            android:textColor="@color/orange_main"
+            android:textSize="24sp"
+
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/pin_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="3"
+            android:textColor="@color/orange_main"
+            android:textSize="24sp"
+
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/pin_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="6"
+            android:textColor="@color/orange_main"
+            android:textSize="24sp"
+
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/pin_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="9"
+            android:textColor="@color/orange_main"
+            android:textSize="24sp"
+
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/pin_delete"
+            android:layout_width="86dp"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            android:scaleType="center"
+            android:src="@drawable/ic_backspace"
+            android:textColor="@color/orange_main"
+            android:textSize="@dimen/small_margin"
+            android:textStyle="bold" />
+
+    </GridLayout>
+</LinearLayout>

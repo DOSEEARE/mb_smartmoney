@@ -163,6 +163,7 @@ class AuthFragment(val country: Country, val numberPhone: String) :
     }
 
     private fun auth() {
+        parentActivity<LoginHostActivity>().showLoading()
         val name = binding.nameEt.text.toString()
         val surName = binding.surnameEt.text.toString()
         val secondName = binding.secondNameEt.text.toString()
@@ -189,6 +190,7 @@ class AuthFragment(val country: Country, val numberPhone: String) :
         viewModel.auth(authBody).observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
+                    parentActivity<LoginHostActivity>().hideLoading()
                     parentActivity<LoginHostActivity>().showSuccess(
                         getString(R.string.success_auth),
                         getString(R.string.loginpas_sms),

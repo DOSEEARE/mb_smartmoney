@@ -1,4 +1,4 @@
-package com.molbulak.smartmoney.ui.login
+package com.molbulak.smartmoney.ui.login.login
 
 import android.hardware.biometrics.BiometricPrompt
 import android.os.Build
@@ -13,11 +13,14 @@ import com.molbulak.smartmoney.App
 import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
 import com.molbulak.smartmoney.databinding.FragmentLoginBinding
+import com.molbulak.smartmoney.extensions.parentActivity
 import com.molbulak.smartmoney.extensions.toast
 import com.molbulak.smartmoney.service.network.Status
 import com.molbulak.smartmoney.service.network.body.LoginBody
 import com.molbulak.smartmoney.service.preference.AppPreferences
 import com.molbulak.smartmoney.service.preference.EncryptedPreferences
+import com.molbulak.smartmoney.ui.login.LoginHostActivity
+import com.molbulak.smartmoney.ui.login.LoginViewModel
 import com.molbulak.smartmoney.util.MyUtil
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,7 +28,7 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val viewModel: LoginViewModel by viewModel()
 
-     override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
@@ -35,12 +38,16 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initChekBoxs()
+        initChekBoxes()
         initLogin()
         initAuth()
     }
 
-    private fun initChekBoxs() {
+    private fun initChekBoxes() {
+        binding.usePinCb.isChecked = AppPreferences.usePinCode
+        binding.useFingerprintCb.isChecked = AppPreferences.useFingerprint
+        binding.rememberLoginCb.isChecked = AppPreferences.rememberLogin
+
         binding.usePinCb.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked)
                 binding.useFingerprintCb.isChecked = false
@@ -58,7 +65,7 @@ class LoginFragment : Fragment() {
             initFingerPrint()
         }
         if (AppPreferences.usePinCode) {
-
+            initPinCode()
         }
     }
 
@@ -70,26 +77,27 @@ class LoginFragment : Fragment() {
 
     private fun initLogin() {
         binding.loginButton.setOnClickListener {
-            login(true)
+            login(LoginType.LOGIN_CLICK)
         }
         binding.forgotButton.setOnClickListener {
             App.getRouter().navigateTo(Screens.RestoreScreen())
         }
     }
 
-    private fun login(IsNewAcc: Boolean) {
+    fun login(loginType: LoginType) {
+        parentActivity<LoginHostActivity>().showLoading()
         val login = binding.loginEt.text.toString()
         val password = MyUtil.md5(binding.passwordEt.text.toString())
-        val loginBody = if (IsNewAcc) {
-            LoginBody(
-                login = login,
-                password = password,
-                appid = requireContext().packageName,
-                system = 1,
-                uid = "1"
-            )
-        } else {
-            LoginBody(
+        val loginBody = when (loginType) {
+            LoginType.LOGIN_CLICK ->
+                LoginBody(
+                    login = login,
+                    password = password,
+                    appid = requireContext().packageName,
+                    system = 1,
+                    uid = "1"
+                )
+            else -> LoginBody(
                 login = EncryptedPreferences.login,
                 password = MyUtil.md5(EncryptedPreferences.password),
                 appid = requireContext().packageName,
@@ -97,66 +105,89 @@ class LoginFragment : Fragment() {
                 uid = "1"
             )
         }
+
         viewModel.login(loginBody).observe(viewLifecycleOwner, {
+            parentActivity<LoginHostActivity>().showLoading()
             val data = it.data
             when (it.status) {
                 Status.SUCCESS -> {
-                    App.getRouter().newRootScreen(Screens.MainScreen())
+                    parentActivity<LoginHostActivity>().hideLoading()
+
                     AppPreferences.isLogined = true
                     AppPreferences.token = data!!.result!!.token
-                    if (IsNewAcc) {
-                        EncryptedPreferences.login = login
-                        EncryptedPreferences.password = binding.passwordEt.text.toString()
+
+                    when (loginType) {
+                        LoginType.PIN_CODE -> App.getRouter().newRootScreen(Screens.MainScreen())
+                        LoginType.FINGERPRINT -> App.getRouter().newRootScreen(Screens.MainScreen())
+                        LoginType.LOGIN_CLICK -> {
+                            EncryptedPreferences.login = login
+                            EncryptedPreferences.password = binding.passwordEt.text.toString()
+                            if (binding.usePinCb.isChecked && AppPreferences.pinCodeIsEmpty())
+                                ChoosePinCodeBF().show(childFragmentManager, "ChoosePinCodeBF")
+                            else
+                                App.getRouter().newRootScreen(Screens.MainScreen())
+                        }
                     }
                     AppPreferences.rememberLogin = binding.rememberLoginCb.isChecked
                     AppPreferences.usePinCode = binding.usePinCb.isChecked
                     AppPreferences.useFingerprint = binding.useFingerprintCb.isChecked
                 }
                 Status.ERROR -> {
+                    parentActivity<LoginHostActivity>().hideLoading()
                     toast("error login ${data!!.error?.code}")
                 }
                 Status.NETWORK -> {
+                    parentActivity<LoginHostActivity>().hideLoading()
                     toast("Проблемы с подключением")
                 }
             }
         })
     }
 
-    private fun initFingerPrint() {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) return
-        if (!MyUtil.checkBiometricSupport(requireContext())) return
-        val cancellationSignal = CancellationSignal()
-        cancellationSignal.setOnCancelListener {
-            toast("finger print canceled")
-        }
+    fun pinCodeDismissed() {
+        binding.usePinCb.isChecked = false
+        AppPreferences.usePinCode = false
+        AppPreferences.pinCode = ""
+    }
 
-        val authenticationCallback: BiometricPrompt.AuthenticationCallback =
+    private fun initPinCode() {
+        PinCodeBF().show(childFragmentManager, "PinCodeBF")
+    }
+
+    private fun initFingerPrint() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            if (!MyUtil.checkBiometricSupport(requireContext())) return
+            val cancellationSignal = CancellationSignal()
+
+            val authenticationCallback: BiometricPrompt.AuthenticationCallback =
                 @RequiresApi(Build.VERSION_CODES.P)
                 object : BiometricPrompt.AuthenticationCallback() {
                     override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
                         super.onAuthenticationSucceeded(result)
-                        login(false)
+                        login(LoginType.FINGERPRINT)
                     }
 
                     override fun onAuthenticationError(errorCode: Int, errString: CharSequence?) {
                         super.onAuthenticationError(errorCode, errString)
-                        toast("Ошибка, введите логин и пароль")
+                        AppPreferences.useFingerprint = false
+                        binding.useFingerprintCb.isChecked = false
                     }
-            }
+                }
 
-        val biometricPrompt = BiometricPrompt.Builder(requireContext())
-            .setTitle(getString(R.string.fingerprint_title))
-            .setDescription(getString(R.string.fingerprint_login))
-            .setNegativeButton(getString(R.string.cancel),
-                requireContext().mainExecutor, { dialog, _ ->
-                    dialog.dismiss()
-                    AppPreferences.useFingerprint = false
-                    binding.useFingerprintCb.isChecked = false
-                }).build()
+            val biometricPrompt = BiometricPrompt.Builder(requireContext())
+                .setTitle(getString(R.string.fingerprint_title))
+                .setDescription(getString(R.string.fingerprint_login))
+                .setNegativeButton(getString(R.string.cancel),
+                    requireContext().mainExecutor, { dialog, _ ->
+                        AppPreferences.useFingerprint = false
+                        binding.useFingerprintCb.isChecked = false
+                        dialog.dismiss()
+                    }).build()
 
-        biometricPrompt.authenticate(cancellationSignal,
-            requireContext().mainExecutor,
-            authenticationCallback)
+            biometricPrompt.authenticate(cancellationSignal,
+                requireContext().mainExecutor,
+                authenticationCallback)
+        }
     }
 
 }

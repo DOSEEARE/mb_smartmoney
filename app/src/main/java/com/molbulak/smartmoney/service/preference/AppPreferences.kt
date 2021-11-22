@@ -29,6 +29,12 @@ object AppPreferences {
             it.putString("token", value)
         }
 
+    var pinCode: String
+        get() = preferences.getString("pinCode", "")!!
+        set(value) = preferences.edit {
+            it.putString("pinCode", value)
+        }
+
     var currentCoordinate: String?
         get() = preferences.getString("currentCoordinate", " ")
         set(value) = preferences.edit {
@@ -61,4 +67,13 @@ object AppPreferences {
         set(value) = preferences.edit {
             it.putBoolean("useFingerprint", value)
         }
+
+    fun pinCodeIsNotEmpty(): Boolean {
+        return pinCode != ""
+    }
+
+    fun pinCodeIsEmpty(): Boolean {
+        return pinCode == ""
+    }
+
 }
