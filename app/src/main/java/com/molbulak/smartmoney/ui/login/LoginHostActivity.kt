@@ -14,8 +14,8 @@ import com.molbulak.smartmoney.App
 import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
 import com.molbulak.smartmoney.databinding.ActivityAuthHostBinding
-import com.molbulak.smartmoney.databinding.AlertSuccessBinding
 import com.molbulak.smartmoney.databinding.DialogLoadingBinding
+import com.molbulak.smartmoney.databinding.DialogSuccessBinding
 import com.molbulak.smartmoney.util.ClickListener
 
 class LoginHostActivity : AppCompatActivity() {
@@ -68,7 +68,7 @@ class LoginHostActivity : AppCompatActivity() {
         val dialog = Dialog(this)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent);
         dialog.setCancelable(false)
-        val binding: AlertSuccessBinding = AlertSuccessBinding.inflate(LayoutInflater.from(this))
+        val binding: DialogSuccessBinding = DialogSuccessBinding.inflate(LayoutInflater.from(this))
         //<---------set view under of this------------->
         binding.contentTv.text = contentText
         binding.titleTv.text = titleText

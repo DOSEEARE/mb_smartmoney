@@ -22,11 +22,16 @@ object AppPreferences {
         editor.apply()
     }
 
-
     var token: String
         get() = preferences.getString("token", "")!!
         set(value) = preferences.edit {
             it.putString("token", value)
+        }
+
+    var login: String
+        get() = preferences.getString("login", "")!!
+        set(value) = preferences.edit {
+            it.putString("login", value)
         }
 
     var pinCode: String

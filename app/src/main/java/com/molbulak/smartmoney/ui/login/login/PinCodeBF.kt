@@ -10,6 +10,7 @@ import com.molbulak.smartmoney.custom.passwordview.ActionListener
 import com.molbulak.smartmoney.databinding.FragmentPinCodeBfBinding
 import com.molbulak.smartmoney.extensions.parentFragment
 import com.molbulak.smartmoney.service.preference.AppPreferences
+import com.molbulak.smartmoney.util.enums.LoginType
 
 class PinCodeBF : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentPinCodeBfBinding

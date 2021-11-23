@@ -3,23 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/nav_loan">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.molbulak.smartmoney.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_loan"
+        android:name="com.molbulak.smartmoney.ui.loan.LoanFragment"
+        android:label="@string/title_loan"
+        tools:layout="@layout/fragment_loan" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.molbulak.smartmoney.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/nav_notification"
+        android:name="com.molbulak.smartmoney.ui.notification.NotificationFragment"
+        android:label="@string/title_notification"
+        tools:layout="@layout/fragment_notification" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.molbulak.smartmoney.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/nav_profile"
+        android:name="com.molbulak.smartmoney.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/nav_support"
+        android:name="com.molbulak.smartmoney.ui.support.SupportFragment"
+        android:label="@string/title_support"
+        tools:layout="@layout/fragment_support" />
+
+    <fragment
+        android:id="@+id/nav_more"
+        android:name="com.molbulak.smartmoney.ui.more.MoreFragment"
+        android:label="@string/title_more"
+        tools:layout="@layout/fragment_more" />
+
 </navigation>

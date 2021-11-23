@@ -22,6 +22,7 @@ import com.molbulak.smartmoney.service.preference.EncryptedPreferences
 import com.molbulak.smartmoney.ui.login.LoginHostActivity
 import com.molbulak.smartmoney.ui.login.LoginViewModel
 import com.molbulak.smartmoney.util.MyUtil
+import com.molbulak.smartmoney.util.enums.LoginType
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
@@ -107,7 +108,6 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.login(loginBody).observe(viewLifecycleOwner, {
-            parentActivity<LoginHostActivity>().showLoading()
             val data = it.data
             when (it.status) {
                 Status.SUCCESS -> {
@@ -121,6 +121,7 @@ class LoginFragment : Fragment() {
                         LoginType.FINGERPRINT -> App.getRouter().newRootScreen(Screens.MainScreen())
                         LoginType.LOGIN_CLICK -> {
                             EncryptedPreferences.login = login
+                            AppPreferences.login = login
                             EncryptedPreferences.password = binding.passwordEt.text.toString()
                             if (binding.usePinCb.isChecked && AppPreferences.pinCodeIsEmpty())
                                 ChoosePinCodeBF().show(childFragmentManager, "ChoosePinCodeBF")

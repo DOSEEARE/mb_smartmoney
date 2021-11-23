@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
-class RetrofitClient {
+object RetrofitClient {
 
     private val authInterceptor = Interceptor { chain ->
         val newUrl = chain.request().url
@@ -21,6 +21,7 @@ class RetrofitClient {
             .newBuilder()
             .addHeader("token", AppPreferences.token)
             .addHeader("api-key", "Cq3Kry")
+            .addHeader("login", AppPreferences.login)
             .url(newUrl)
             .build()
         chain.proceed(newRequest)

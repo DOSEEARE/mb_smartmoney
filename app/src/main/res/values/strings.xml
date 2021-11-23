@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">SmartMoney</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_loan">Займы</string>
+    <string name="title_notification">Уведомления</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="enter">Вход</string>
     <string name="login">Логин</string>
@@ -55,4 +54,11 @@
     <string name="pin_code">Пин-код</string>
     <string name="repeat_pin_code">Повторите пин-код</string>
     <string name="continue_">Продолжить</string>
+    <string name="title_profile">Профиль</string>
+    <string name="title_support">Поддержка</string>
+    <string name="title_more">Еще</string>
+    <string name="balance">Остаток:</string>
+    <string name="paid">Уже оплачено:</string>
+    <string name="make_repayment">Внести погашение</string>
+    <string name="have_not_loan">У вас нет активного займа</string>
 </resources>
