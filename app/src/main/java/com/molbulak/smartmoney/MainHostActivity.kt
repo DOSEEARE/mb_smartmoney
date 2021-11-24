@@ -4,20 +4,12 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.github.terrakok.cicerone.androidx.AppNavigator
-import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.molbulak.smartmoney.adapter.ViewPagerAdapter
 import com.molbulak.smartmoney.databinding.ActivityMainHostBinding
 import com.molbulak.smartmoney.databinding.DialogLoadingBinding
 import com.molbulak.smartmoney.databinding.DialogSuccessBinding
 import com.molbulak.smartmoney.ui.ContainerFragment
-import com.molbulak.smartmoney.ui.loan.LoanFragment
-import com.molbulak.smartmoney.ui.more.MoreFragment
-import com.molbulak.smartmoney.ui.notification.NotificationFragment
-import com.molbulak.smartmoney.ui.profile.ProfileFragment
-import com.molbulak.smartmoney.ui.support.SupportFragment
 import com.molbulak.smartmoney.util.ClickListener
 import com.molbulak.smartmoney.util.enums.FragmentType
 
@@ -26,7 +18,6 @@ class MainHostActivity : AppCompatActivity() {
 
     private lateinit var loadingDialog: Dialog
     private lateinit var binding: ActivityMainHostBinding
-
 
     private lateinit var navigator: AppNavigator
 
@@ -41,12 +32,6 @@ class MainHostActivity : AppCompatActivity() {
 
     private fun initBottomNav() {
         val pagerAdapter = ViewPagerAdapter(supportFragmentManager)
-/*        pagerAdapter.addFragment(LoanFragment())
-        pagerAdapter.addFragment(NotificationFragment())
-        pagerAdapter.addFragment(ProfileFragment())
-        pagerAdapter.addFragment(SupportFragment())
-        pagerAdapter.addFragment(MoreFragment())*/
-
         pagerAdapter.addFragment(ContainerFragment(FragmentType.LOAN))
         pagerAdapter.addFragment(ContainerFragment(FragmentType.NOTIFICATION))
         pagerAdapter.addFragment(ContainerFragment(FragmentType.PROFILE))

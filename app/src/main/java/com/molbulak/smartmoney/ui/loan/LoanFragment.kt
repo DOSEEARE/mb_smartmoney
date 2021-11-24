@@ -5,30 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import com.github.terrakok.cicerone.androidx.AppNavigator
-import com.github.terrakok.cicerone.androidx.FragmentScreen
+import com.github.terrakok.cicerone.Router
 import com.molbulak.smartmoney.App
-import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
 import com.molbulak.smartmoney.adapter.NewsAdapter
-import com.molbulak.smartmoney.base.BackButtonListener
-import com.molbulak.smartmoney.base.HostFragment
 import com.molbulak.smartmoney.databinding.FragmentLoanBinding
+import com.molbulak.smartmoney.extensions.parentFragment
 import com.molbulak.smartmoney.extensions.toast
 import com.molbulak.smartmoney.service.network.Status
+import com.molbulak.smartmoney.ui.ContainerFragment
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoanFragment : Fragment(), BackButtonListener {
+class LoanFragment : Fragment() {
     lateinit var binding: FragmentLoanBinding
     private val viewModel: LoanViewModel by viewModel()
-
+    private lateinit var router: Router
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        router = parentFragment<ContainerFragment>().router
         binding = FragmentLoanBinding.inflate(inflater, container, false)
         initNews()
         return binding.root
@@ -42,7 +41,7 @@ class LoanFragment : Fragment(), BackButtonListener {
                 Status.SUCCESS -> {
 //                    parentActivity<MainHostActivity>().hideLoading()
                     binding.newsRv.adapter = NewsAdapter(data?.result!!) {
-                        App.getRouter().navigateTo(Screens.NewsDetailScreen())
+                        router.navigateTo(Screens.NewsDetailScreen())
                     }
                     toast("news success ${data.code}")
                 }
@@ -58,8 +57,5 @@ class LoanFragment : Fragment(), BackButtonListener {
         })
     }
 
-    override fun onBackPressed(): Boolean {
-        App.getRouter().exit()
-        return true
-    }
+
 }

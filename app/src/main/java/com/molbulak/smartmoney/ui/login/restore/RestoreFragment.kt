@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.github.terrakok.cicerone.Router
 import com.molbulak.smartmoney.App
 import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
@@ -19,6 +20,7 @@ import com.molbulak.smartmoney.ui.login.LoginHostActivity
 import com.molbulak.smartmoney.ui.login.LoginViewModel
 import com.molbulak.smartmoney.ui.login.check_number.ChooseCountryBF
 import com.molbulak.smartmoney.util.MyUtil
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.tinkoff.decoro.MaskImpl
 import ru.tinkoff.decoro.slots.PredefinedSlots
@@ -35,6 +37,7 @@ class RestoreFragment : Fragment(), SelectCountryListener {
 
     private var inputMask =
         MaskFormatWatcher(MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER))
+    private val router : Router by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +45,7 @@ class RestoreFragment : Fragment(), SelectCountryListener {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentRestoreBinding.inflate(layoutInflater, container, false)
-        binding.backBtn.setOnClickListener { App.getRouter().exit() }
+        binding.backBtn.setOnClickListener { router.exit() }
         initCountry()
         initViews()
         return binding.root
@@ -68,7 +71,7 @@ class RestoreFragment : Fragment(), SelectCountryListener {
                         getString(R.string.loginpas_sms),
                         getString(R.string.accept)) { dialog ->
                         dialog.dismiss()
-                        App.getRouter().newRootScreen(Screens.LoginScreen())
+                        router.newRootScreen(Screens.LoginScreen())
                     }
                     toast("restore success ${it.data!!.error?.code}")
                 }

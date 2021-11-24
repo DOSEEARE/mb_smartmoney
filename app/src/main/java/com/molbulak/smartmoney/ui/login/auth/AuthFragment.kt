@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.github.terrakok.cicerone.Router
 import com.molbulak.smartmoney.App
 import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
@@ -25,6 +26,7 @@ import com.molbulak.smartmoney.ui.login.LoginHostActivity
 import com.molbulak.smartmoney.ui.login.LoginViewModel
 import com.molbulak.smartmoney.util.Date
 import com.molbulak.smartmoney.util.MyUtil
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -48,6 +50,8 @@ class AuthFragment(val country: Country, val numberPhone: String) :
 
     private var selectedDate: Date? = null
 
+    private val router : Router by inject()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -61,7 +65,7 @@ class AuthFragment(val country: Country, val numberPhone: String) :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.backBtn.setOnClickListener { App.getRouter().exit() }
+        binding.backBtn.setOnClickListener { router.exit() }
         initViews()
         initLists()
     }
@@ -70,7 +74,7 @@ class AuthFragment(val country: Country, val numberPhone: String) :
         binding.numberPhoneOne.setText(numberPhone)
         binding.numberPhoneTwo.inputType = InputType.TYPE_CLASS_PHONE
         binding.registeredTv.setOnClickListener {
-            App.getRouter().newRootScreen(Screens.LoginScreen())
+            router.newRootScreen(Screens.LoginScreen())
         }
         binding.authBtn.setOnClickListener {
             if (checkFields()) {
@@ -196,7 +200,7 @@ class AuthFragment(val country: Country, val numberPhone: String) :
                         getString(R.string.loginpas_sms),
                         getString(R.string.accept)) { dialog ->
                         dialog.dismiss()
-                        App.getRouter().newRootScreen(Screens.LoginScreen())
+                        router.newRootScreen(Screens.LoginScreen())
                     }
                 }
                 Status.ERROR -> {

@@ -4,31 +4,39 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Replace
+import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
-import com.molbulak.smartmoney.App
 import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
+import com.molbulak.smartmoney.base.HostFragment
+import com.molbulak.smartmoney.cicerone.LocalCiceroneHolder
 import com.molbulak.smartmoney.databinding.FragmentContainerBinding
 import com.molbulak.smartmoney.util.enums.FragmentType
+import org.koin.android.ext.android.inject
 
 
-class ContainerFragment(private val fragmentType: FragmentType) : Fragment(), BackButtonListener {
+class ContainerFragment(private val fragmentType: FragmentType) : HostFragment(),
+    BackButtonListener {
     private lateinit var binding: FragmentContainerBinding
-    private lateinit var navigator: AppNavigator
+    private val localCiceroneHolder: LocalCiceroneHolder by inject()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        navigator = object : AppNavigator(requireActivity(), R.id.container, childFragmentManager) {
-        }
-    }
+    private lateinit var navigator: AppNavigator
+    private lateinit var cicerone: Cicerone<Router>
+    lateinit var router: Router
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentContainerBinding.inflate(inflater, container, false)
+        navigator =
+            object : AppNavigator(requireActivity(), binding.container.id, childFragmentManager) {}
+        cicerone = localCiceroneHolder.getCicerone(fragmentType.toString())
+        router = localCiceroneHolder.getCicerone(fragmentType.toString()).router
+
         when (fragmentType) {
             FragmentType.LOAN -> navigator.applyCommands(arrayOf(Replace(Screens.LoanScreen())))
             FragmentType.MORE -> navigator.applyCommands(arrayOf(Replace(Screens.MoreScreen())))
@@ -46,20 +54,21 @@ class ContainerFragment(private val fragmentType: FragmentType) : Fragment(), Ba
         ) {
             true
         } else {
-            App.getRouter().exit()
+            router.exit()
             true
         }
     }
 
     override fun onResume() {
         super.onResume()
-        App.INSTANCE.getNavigator().setNavigator(navigator)
+        cicerone.getNavigatorHolder().setNavigator(navigator)
     }
 
     override fun onPause() {
         super.onPause()
-        App.INSTANCE.getNavigator().removeNavigator()
+        cicerone.getNavigatorHolder().removeNavigator()
     }
+
 
 }
 
