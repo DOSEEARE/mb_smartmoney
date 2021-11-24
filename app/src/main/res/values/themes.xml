@@ -20,7 +20,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+    <style name="NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="editTextStyle">@style/LoginInput</item>
         <item name="colorPrimary">@color/orange_main</item>
         <item name="colorPrimaryVariant">@color/orange_main</item>

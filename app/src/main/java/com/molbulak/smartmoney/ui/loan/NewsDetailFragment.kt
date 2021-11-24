@@ -6,13 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.molbulak.smartmoney.App
+import com.molbulak.smartmoney.base.BackButtonListener
 import com.molbulak.smartmoney.databinding.FragmentNewsDetailBinding
-import com.molbulak.smartmoney.ui.BackButtonListener
 
 
 class NewsDetailFragment : Fragment(), BackButtonListener {
     lateinit var binding: FragmentNewsDetailBinding
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -21,7 +20,7 @@ class NewsDetailFragment : Fragment(), BackButtonListener {
         return binding.root
     }
 
-    override fun onBackPressed():Boolean {
+    override fun onBackPressed(): Boolean {
         App.getRouter().exit()
         return true
     }

@@ -5,9 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
+import com.github.terrakok.cicerone.Replace
 import com.github.terrakok.cicerone.androidx.AppNavigator
-import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.molbulak.smartmoney.App
 import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
@@ -22,19 +21,6 @@ class ContainerFragment(private val fragmentType: FragmentType) : Fragment(), Ba
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navigator = object : AppNavigator(requireActivity(), R.id.container, childFragmentManager) {
-            override fun setupFragmentTransaction(
-                screen: FragmentScreen,
-                fragmentTransaction: FragmentTransaction,
-                currentFragment: Fragment?,
-                nextFragment: Fragment,
-            ) {
-                fragmentTransaction.setCustomAnimations(
-                    R.anim.slide_enter_next,
-                    R.anim.slide_leave_next,
-                    R.anim.slide_enter_back,
-                    R.anim.slide_leave_back
-                )
-            }
         }
     }
 
@@ -44,12 +30,11 @@ class ContainerFragment(private val fragmentType: FragmentType) : Fragment(), Ba
     ): View {
         binding = FragmentContainerBinding.inflate(inflater, container, false)
         when (fragmentType) {
-            FragmentType.LOAN -> App.getRouter().replaceScreen(Screens.LoanScreen())
-            FragmentType.MORE -> App.getRouter().replaceScreen(Screens.MoreScreen())
-            FragmentType.NOTIFICATION -> App.getRouter()
-                .replaceScreen(Screens.NotificationScreen())
-            FragmentType.PROFILE -> App.getRouter().replaceScreen(Screens.ProfileScreen())
-            FragmentType.SUPPORT -> App.getRouter().replaceScreen(Screens.SupportScreen())
+            FragmentType.LOAN -> navigator.applyCommands(arrayOf(Replace(Screens.LoanScreen())))
+            FragmentType.MORE -> navigator.applyCommands(arrayOf(Replace(Screens.MoreScreen())))
+            FragmentType.NOTIFICATION -> navigator.applyCommands(arrayOf(Replace(Screens.NotificationScreen())))
+            FragmentType.PROFILE -> navigator.applyCommands(arrayOf(Replace(Screens.ProfileScreen())))
+            FragmentType.SUPPORT -> navigator.applyCommands(arrayOf(Replace(Screens.SupportScreen())))
         }
         return binding.root
     }
@@ -76,11 +61,8 @@ class ContainerFragment(private val fragmentType: FragmentType) : Fragment(), Ba
         App.INSTANCE.getNavigator().removeNavigator()
     }
 
-
 }
-
 
 interface BackButtonListener {
     fun onBackPressed(): Boolean
 }
-

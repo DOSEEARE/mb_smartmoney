@@ -4,7 +4,6 @@ import android.content.Intent
 import com.github.terrakok.cicerone.androidx.ActivityScreen
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.molbulak.smartmoney.service.network.response.country.Country
-import com.molbulak.smartmoney.ui.ContainerFragment
 import com.molbulak.smartmoney.ui.loan.LoanFragment
 import com.molbulak.smartmoney.ui.loan.NewsDetailFragment
 import com.molbulak.smartmoney.ui.login.LoginHostActivity
@@ -55,9 +54,6 @@ object Screens {
         MoreFragment()
     }
 
-    fun ContainerScreen(fragmentType: FragmentType) = FragmentScreen {
-        ContainerFragment(fragmentType)
-    }
 
     fun CheckNumberScreen() = FragmentScreen {
         CheckNumberFragment()
