@@ -18,7 +18,7 @@ import com.molbulak.smartmoney.databinding.FragmentContainerBinding
 import com.molbulak.smartmoney.util.enums.ContainerType
 
 
-class ContainerFragment(private val containerType: ContainerType) : Fragment(),
+class ContainerFragment(val containerType: ContainerType) : Fragment(),
     BackButtonListener {
     private lateinit var binding: FragmentContainerBinding
 
@@ -60,10 +60,10 @@ class ContainerFragment(private val containerType: ContainerType) : Fragment(),
         return binding.root
     }
 
-    override fun onBackPressed(): Boolean {
+    override fun backPressed(): Boolean {
         val fragment = childFragmentManager.findFragmentById(binding.container.id)
         return if (fragment != null && fragment is BackButtonListener
-            && (fragment as BackButtonListener).onBackPressed()
+            && (fragment as BackButtonListener).backPressed()
         ) {
             true
         } else {
@@ -82,8 +82,9 @@ class ContainerFragment(private val containerType: ContainerType) : Fragment(),
         cicerone.getNavigatorHolder().removeNavigator()
     }
 
+    
 }
 
 interface BackButtonListener {
-    fun onBackPressed(): Boolean
+    fun backPressed(): Boolean
 }

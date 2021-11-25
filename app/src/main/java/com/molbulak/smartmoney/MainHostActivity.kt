@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.molbulak.smartmoney.adapter.ViewPagerAdapter
 import com.molbulak.smartmoney.databinding.ActivityMainHostBinding
 import com.molbulak.smartmoney.databinding.DialogLoadingBinding
@@ -19,6 +18,8 @@ class MainHostActivity : AppCompatActivity() {
 
     private lateinit var loadingDialog: Dialog
     private lateinit var binding: ActivityMainHostBinding
+    private lateinit var pagerAdapter: ViewPagerAdapter
+    private var currentFragmentPos = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,14 +29,15 @@ class MainHostActivity : AppCompatActivity() {
     }
 
     private fun initBottomNav() {
-        val pagerAdapter = ViewPagerAdapter(supportFragmentManager)
-        pagerAdapter.addFragment(ContainerFragment(ContainerType.NOTICE))
+        pagerAdapter = ViewPagerAdapter(supportFragmentManager)
         pagerAdapter.addFragment(ContainerFragment(ContainerType.LOAN))
+        pagerAdapter.addFragment(ContainerFragment(ContainerType.NOTICE))
         pagerAdapter.addFragment(ContainerFragment(ContainerType.PROFILE))
         pagerAdapter.addFragment(ContainerFragment(ContainerType.SUPPORT))
         pagerAdapter.addFragment(ContainerFragment(ContainerType.MORE))
 
         binding.mainContainer.adapter = pagerAdapter
+
         val bottomNavigationView = binding.navView
         binding.mainContainer.offscreenPageLimit = 4
         bottomNavigationView.setOnItemSelectedListener { item ->
@@ -43,18 +45,23 @@ class MainHostActivity : AppCompatActivity() {
                 when (item.itemId) {
                     R.id.nav_loan -> {
                         binding.mainContainer.setCurrentItem(0, false)
+                        currentFragmentPos = 0
                     }
                     R.id.nav_notification -> {
                         binding.mainContainer.setCurrentItem(1, false)
+                        currentFragmentPos = 1
                     }
                     R.id.nav_profile -> {
                         binding.mainContainer.setCurrentItem(2, false)
+                        currentFragmentPos = 2
                     }
                     R.id.nav_support -> {
                         binding.mainContainer.setCurrentItem(3, false)
+                        currentFragmentPos = 3
                     }
                     R.id.nav_more -> {
                         binding.mainContainer.setCurrentItem(4, false)
+                        currentFragmentPos = 4
                     }
                 }
             }
@@ -63,24 +70,9 @@ class MainHostActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val fm = supportFragmentManager
-        var fragment: Fragment? = null
-        val fragments = fm.fragments
-        for (f in fragments) {
-            if (f.isVisible) {
-                fragment = f
-                break
-            }
-        }
-        if (fragment != null && fragment is BackButtonListener
-            && (fragment as BackButtonListener).onBackPressed()
-        ) {
-            return
-        } else {
-            super.onBackPressed()
-        }
+        val currentFragment = pagerAdapter.getItem(currentFragmentPos)
+        (currentFragment as BackButtonListener).backPressed()
     }
-
 
     fun showSuccess(
         titleText: String,

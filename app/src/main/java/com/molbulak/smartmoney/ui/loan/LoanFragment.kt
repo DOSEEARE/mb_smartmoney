@@ -54,7 +54,7 @@ class LoanFragment : Fragment(), BackButtonListener {
 
     }
 
-    override fun onBackPressed(): Boolean {
+    override fun backPressed(): Boolean {
         router.exit()
         return true
     }
