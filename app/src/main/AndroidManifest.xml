@@ -21,7 +21,7 @@
             android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name=".ui.login.LoginHostActivity"
+            android:name=".ui.login.LoginBaseActivity"
             android:theme="@style/NoActionBar"
             android:exported="true"
             android:label="@string/app_name"

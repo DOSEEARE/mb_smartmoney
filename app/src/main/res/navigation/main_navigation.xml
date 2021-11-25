@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/nav_notification"
-        android:name="com.molbulak.smartmoney.ui.notification.NotificationFragment"
+        android:name="com.molbulak.smartmoney.ui.notification.NoticeFragment"
         android:label="@string/title_notification"
         tools:layout="@layout/fragment_notification" />
 

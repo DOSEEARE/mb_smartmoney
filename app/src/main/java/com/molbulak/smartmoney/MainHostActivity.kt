@@ -4,14 +4,15 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import com.github.terrakok.cicerone.androidx.AppNavigator
+import androidx.fragment.app.Fragment
 import com.molbulak.smartmoney.adapter.ViewPagerAdapter
 import com.molbulak.smartmoney.databinding.ActivityMainHostBinding
 import com.molbulak.smartmoney.databinding.DialogLoadingBinding
 import com.molbulak.smartmoney.databinding.DialogSuccessBinding
+import com.molbulak.smartmoney.ui.BackButtonListener
 import com.molbulak.smartmoney.ui.ContainerFragment
 import com.molbulak.smartmoney.util.ClickListener
-import com.molbulak.smartmoney.util.enums.FragmentType
+import com.molbulak.smartmoney.util.enums.ContainerType
 
 
 class MainHostActivity : AppCompatActivity() {
@@ -19,12 +20,8 @@ class MainHostActivity : AppCompatActivity() {
     private lateinit var loadingDialog: Dialog
     private lateinit var binding: ActivityMainHostBinding
 
-    private lateinit var navigator: AppNavigator
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        navigator = object : AppNavigator(this, R.id.container) {}
         binding = ActivityMainHostBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initBottomNav()
@@ -32,11 +29,11 @@ class MainHostActivity : AppCompatActivity() {
 
     private fun initBottomNav() {
         val pagerAdapter = ViewPagerAdapter(supportFragmentManager)
-        pagerAdapter.addFragment(ContainerFragment(FragmentType.LOAN))
-        pagerAdapter.addFragment(ContainerFragment(FragmentType.NOTIFICATION))
-        pagerAdapter.addFragment(ContainerFragment(FragmentType.PROFILE))
-        pagerAdapter.addFragment(ContainerFragment(FragmentType.SUPPORT))
-        pagerAdapter.addFragment(ContainerFragment(FragmentType.MORE))
+        pagerAdapter.addFragment(ContainerFragment(ContainerType.NOTICE))
+        pagerAdapter.addFragment(ContainerFragment(ContainerType.LOAN))
+        pagerAdapter.addFragment(ContainerFragment(ContainerType.PROFILE))
+        pagerAdapter.addFragment(ContainerFragment(ContainerType.SUPPORT))
+        pagerAdapter.addFragment(ContainerFragment(ContainerType.MORE))
 
         binding.mainContainer.adapter = pagerAdapter
         val bottomNavigationView = binding.navView
@@ -64,6 +61,26 @@ class MainHostActivity : AppCompatActivity() {
             true
         }
     }
+
+    override fun onBackPressed() {
+        val fm = supportFragmentManager
+        var fragment: Fragment? = null
+        val fragments = fm.fragments
+        for (f in fragments) {
+            if (f.isVisible) {
+                fragment = f
+                break
+            }
+        }
+        if (fragment != null && fragment is BackButtonListener
+            && (fragment as BackButtonListener).onBackPressed()
+        ) {
+            return
+        } else {
+            super.onBackPressed()
+        }
+    }
+
 
     fun showSuccess(
         titleText: String,

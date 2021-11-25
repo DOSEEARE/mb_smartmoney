@@ -5,7 +5,7 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import org.koin.android.ext.android.inject
 
-abstract class HostActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
     abstract val navigator: AppNavigator
     private val navigatorHolder: NavigatorHolder by inject()
 

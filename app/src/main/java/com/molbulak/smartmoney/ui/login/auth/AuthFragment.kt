@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.github.terrakok.cicerone.Router
-import com.molbulak.smartmoney.App
 import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
 import com.molbulak.smartmoney.adapter.SelectGenderListener
@@ -22,7 +21,7 @@ import com.molbulak.smartmoney.service.network.response.country.Country
 import com.molbulak.smartmoney.service.network.response.gender.Gender
 import com.molbulak.smartmoney.service.network.response.nationality.Nation
 import com.molbulak.smartmoney.service.network.response.question.Question
-import com.molbulak.smartmoney.ui.login.LoginHostActivity
+import com.molbulak.smartmoney.ui.login.LoginBaseActivity
 import com.molbulak.smartmoney.ui.login.LoginViewModel
 import com.molbulak.smartmoney.util.Date
 import com.molbulak.smartmoney.util.MyUtil
@@ -167,7 +166,7 @@ class AuthFragment(val country: Country, val numberPhone: String) :
     }
 
     private fun auth() {
-        parentActivity<LoginHostActivity>().showLoading()
+        parentActivity<LoginBaseActivity>().showLoading()
         val name = binding.nameEt.text.toString()
         val surName = binding.surnameEt.text.toString()
         val secondName = binding.secondNameEt.text.toString()
@@ -194,8 +193,8 @@ class AuthFragment(val country: Country, val numberPhone: String) :
         viewModel.auth(authBody).observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
-                    parentActivity<LoginHostActivity>().hideLoading()
-                    parentActivity<LoginHostActivity>().showSuccess(
+                    parentActivity<LoginBaseActivity>().hideLoading()
+                    parentActivity<LoginBaseActivity>().showSuccess(
                         getString(R.string.success_auth),
                         getString(R.string.loginpas_sms),
                         getString(R.string.accept)) { dialog ->

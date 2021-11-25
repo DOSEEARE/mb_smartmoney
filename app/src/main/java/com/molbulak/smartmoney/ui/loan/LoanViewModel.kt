@@ -10,7 +10,6 @@ import com.molbulak.smartmoney.service.network.response.news.NewsResponse
 
 class LoanViewModel(application: Application) : BaseViewModel(application) {
     val listNews = listNews()
-
     fun listNews(): LiveData<Resource<NewsResponse>> {
         return network.listNews()
     }

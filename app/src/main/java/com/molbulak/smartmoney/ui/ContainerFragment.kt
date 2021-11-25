@@ -4,28 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Replace
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.github.terrakok.cicerone.androidx.FragmentScreen
+import com.molbulak.smartmoney.App
 import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
-import com.molbulak.smartmoney.base.HostFragment
-import com.molbulak.smartmoney.cicerone.LocalCiceroneHolder
 import com.molbulak.smartmoney.databinding.FragmentContainerBinding
-import com.molbulak.smartmoney.util.enums.FragmentType
-import org.koin.android.ext.android.inject
+import com.molbulak.smartmoney.util.enums.ContainerType
 
 
-class ContainerFragment(private val fragmentType: FragmentType) : HostFragment(),
+class ContainerFragment(private val containerType: ContainerType) : Fragment(),
     BackButtonListener {
     private lateinit var binding: FragmentContainerBinding
-    private val localCiceroneHolder: LocalCiceroneHolder by inject()
 
     private lateinit var navigator: AppNavigator
+    private lateinit var router: Router
     private lateinit var cicerone: Cicerone<Router>
-    lateinit var router: Router
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,22 +32,36 @@ class ContainerFragment(private val fragmentType: FragmentType) : HostFragment()
     ): View {
         binding = FragmentContainerBinding.inflate(inflater, container, false)
         navigator =
-            object : AppNavigator(requireActivity(), binding.container.id, childFragmentManager) {}
-        cicerone = localCiceroneHolder.getCicerone(fragmentType.toString())
-        router = localCiceroneHolder.getCicerone(fragmentType.toString()).router
+            object : AppNavigator(requireActivity(), binding.container.id, childFragmentManager) {
+                override fun setupFragmentTransaction(
+                    screen: FragmentScreen,
+                    fragmentTransaction: FragmentTransaction,
+                    currentFragment: Fragment?,
+                    nextFragment: Fragment,
+                ) {
+                    fragmentTransaction.setCustomAnimations(
+                        R.anim.slide_enter_next,
+                        R.anim.slide_leave_next,
+                        R.anim.slide_enter_back,
+                        R.anim.slide_leave_back
+                    )
+                }
+            }
+        cicerone = App.localCicerone.getCicerone(containerType).cicerone
+        router = App.localCicerone.getCicerone(containerType).router
 
-        when (fragmentType) {
-            FragmentType.LOAN -> navigator.applyCommands(arrayOf(Replace(Screens.LoanScreen())))
-            FragmentType.MORE -> navigator.applyCommands(arrayOf(Replace(Screens.MoreScreen())))
-            FragmentType.NOTIFICATION -> navigator.applyCommands(arrayOf(Replace(Screens.NotificationScreen())))
-            FragmentType.PROFILE -> navigator.applyCommands(arrayOf(Replace(Screens.ProfileScreen())))
-            FragmentType.SUPPORT -> navigator.applyCommands(arrayOf(Replace(Screens.SupportScreen())))
+        when (containerType) {
+            ContainerType.LOAN -> navigator.applyCommands(arrayOf(Replace(Screens.LoanScreen())))
+            ContainerType.MORE -> navigator.applyCommands(arrayOf(Replace(Screens.MoreScreen())))
+            ContainerType.NOTICE -> navigator.applyCommands(arrayOf(Replace(Screens.NotificationScreen())))
+            ContainerType.PROFILE -> navigator.applyCommands(arrayOf(Replace(Screens.ProfileScreen())))
+            ContainerType.SUPPORT -> navigator.applyCommands(arrayOf(Replace(Screens.SupportScreen())))
         }
         return binding.root
     }
 
     override fun onBackPressed(): Boolean {
-        val fragment = childFragmentManager.findFragmentById(R.id.container)
+        val fragment = childFragmentManager.findFragmentById(binding.container.id)
         return if (fragment != null && fragment is BackButtonListener
             && (fragment as BackButtonListener).onBackPressed()
         ) {
@@ -68,7 +81,6 @@ class ContainerFragment(private val fragmentType: FragmentType) : HostFragment()
         super.onPause()
         cicerone.getNavigatorHolder().removeNavigator()
     }
-
 
 }
 

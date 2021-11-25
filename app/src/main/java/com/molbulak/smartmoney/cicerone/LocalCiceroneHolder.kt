@@ -1,14 +1,21 @@
 package com.molbulak.smartmoney.cicerone
 
 import com.github.terrakok.cicerone.Cicerone
-import com.github.terrakok.cicerone.Router
-import java.util.HashMap
+import com.molbulak.smartmoney.util.enums.ContainerType
+import java.util.*
 
-class LocalCiceroneHolder {
-    private val containers = HashMap<String, Cicerone<Router>>()
+object LocalCiceroneHolder {
+    private val containers = HashMap<ContainerType, LocalCicerone>()
 
-    fun getCicerone(containerTag: String): Cicerone<Router> =
-        containers.getOrPut(containerTag) {
-            Cicerone.create()
+    fun getCicerone(containerType: ContainerType): LocalCicerone =
+        containers.getOrPut(containerType) {
+            LocalCicerone()
         }
 }
+
+class LocalCicerone {
+    val cicerone = Cicerone.create()
+    val router = cicerone.router
+}
+
+

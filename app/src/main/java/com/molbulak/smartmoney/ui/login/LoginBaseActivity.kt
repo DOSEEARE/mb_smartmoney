@@ -11,13 +11,13 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
-import com.molbulak.smartmoney.base.HostActivity
+import com.molbulak.smartmoney.base.BaseActivity
 import com.molbulak.smartmoney.databinding.ActivityAuthHostBinding
 import com.molbulak.smartmoney.databinding.DialogLoadingBinding
 import com.molbulak.smartmoney.databinding.DialogSuccessBinding
 import com.molbulak.smartmoney.util.ClickListener
 
-class LoginHostActivity : HostActivity() {
+class LoginBaseActivity : BaseActivity() {
     override val navigator = object : AppNavigator(this, R.id.auth_container) {
 
         override fun setupFragmentTransaction(
