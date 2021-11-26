@@ -13,12 +13,14 @@
         <entry key="app/src/main/res/drawable/bg_login_btn.xml" value="0.33055555555555555" />
         <entry key="app/src/main/res/drawable/bg_news_img.xml" value="0.2890625" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.24583333333333332" />
+        <entry key="app/src/main/res/drawable/ic_back_white.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/drawable/ic_backspace.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/drawable/ic_drop_down.xml" value="0.24583333333333332" />
         <entry key="app/src/main/res/drawable/ic_group_60.xml" value="0.2890625" />
         <entry key="app/src/main/res/drawable/ic_support.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/drawable/ic_wallet.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/drawable/ic_warning.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/drawable/include_toolbar.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/layout/SupportFragment.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.1796875" />
         <entry key="app/src/main/res/layout/activity_auth_host.xml" value="0.265625" />
@@ -40,13 +42,17 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.4719626168224299" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/layout/fragment_news_detail.xml" value="0.353125" />
-        <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.2713541666666667" />
+        <entry key="app/src/main/res/layout/fragment_notice_detail.xml" value="0.2546875" />
+        <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_pin_code_bf.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/layout/fragment_restore.xml" value="0.3067708333333333" />
         <entry key="app/src/main/res/layout/fragment_support.xml" value="0.353125" />
+        <entry key="app/src/main/res/layout/include_toolbar.xml" value="0.353125" />
         <entry key="app/src/main/res/layout/item_choose_country.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_news.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_notice.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_notification.xml" value="0.33" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.234375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.234375" />

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.molbulak.smartmoney.App
+import com.github.terrakok.cicerone.Router
 import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
 import com.molbulak.smartmoney.adapter.SelectCountryListener
@@ -15,10 +15,11 @@ import com.molbulak.smartmoney.extensions.toast
 import com.molbulak.smartmoney.service.network.Status
 import com.molbulak.smartmoney.service.network.body.RestoreBody
 import com.molbulak.smartmoney.service.network.response.country.Country
-import com.molbulak.smartmoney.ui.login.LoginHostActivity
+import com.molbulak.smartmoney.ui.login.LoginBaseActivity
 import com.molbulak.smartmoney.ui.login.LoginViewModel
 import com.molbulak.smartmoney.ui.login.check_number.ChooseCountryBF
 import com.molbulak.smartmoney.util.MyUtil
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.tinkoff.decoro.MaskImpl
 import ru.tinkoff.decoro.slots.PredefinedSlots
@@ -35,6 +36,7 @@ class RestoreFragment : Fragment(), SelectCountryListener {
 
     private var inputMask =
         MaskFormatWatcher(MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER))
+    private val router : Router by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +44,7 @@ class RestoreFragment : Fragment(), SelectCountryListener {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentRestoreBinding.inflate(layoutInflater, container, false)
-        binding.backBtn.setOnClickListener { App.getRouter().exit() }
+        binding.backBtn.setOnClickListener { router.exit() }
         initCountry()
         initViews()
         return binding.root
@@ -55,29 +57,29 @@ class RestoreFragment : Fragment(), SelectCountryListener {
     }
 
     private fun initRestore() {
-        parentActivity<LoginHostActivity>().showLoading()
+        parentActivity<LoginBaseActivity>().showLoading()
         val number = MyUtil.onlyDigits(binding.numberPhone.text.toString())
         val secretWord = binding.secretWord.text.toString()
         val body = RestoreBody(number, secretWord)
         viewModel.restore(body).observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
-                    parentActivity<LoginHostActivity>().hideLoading()
-                    parentActivity<LoginHostActivity>().showSuccess(
+                    parentActivity<LoginBaseActivity>().hideLoading()
+                    parentActivity<LoginBaseActivity>().showSuccess(
                         getString(R.string.success_restore),
                         getString(R.string.loginpas_sms),
                         getString(R.string.accept)) { dialog ->
                         dialog.dismiss()
-                        App.getRouter().newRootScreen(Screens.LoginScreen())
+                        router.newRootScreen(Screens.LoginScreen())
                     }
                     toast("restore success ${it.data!!.error?.code}")
                 }
                 Status.ERROR -> {
-                    parentActivity<LoginHostActivity>().hideLoading()
+                    parentActivity<LoginBaseActivity>().hideLoading()
                     toast("restore error ${it.data!!.error?.code}")
                 }
                 Status.NETWORK -> {
-                    parentActivity<LoginHostActivity>().hideLoading()
+                    parentActivity<LoginBaseActivity>().hideLoading()
                     toast("Проблемы с подключением")
                 }
             }

@@ -12,10 +12,9 @@ import com.molbulak.smartmoney.extensions.parentActivity
 import com.molbulak.smartmoney.extensions.toast
 import com.molbulak.smartmoney.service.network.Status
 import com.molbulak.smartmoney.service.network.body.CheckCodeBody
-import com.molbulak.smartmoney.ui.login.LoginHostActivity
+import com.molbulak.smartmoney.ui.login.LoginBaseActivity
 import com.molbulak.smartmoney.ui.login.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class CheckCodeBF(
     private val requestId: Int,
@@ -49,22 +48,22 @@ class CheckCodeBF(
     }
 
     private fun checkCode(checkCodeBody: CheckCodeBody) {
-        parentActivity<LoginHostActivity>().showLoading()
+        parentActivity<LoginBaseActivity>().showLoading()
         viewModel.checkCode(checkCodeBody).observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
-                    parentActivity<LoginHostActivity>().hideLoading()
+                    parentActivity<LoginBaseActivity>().hideLoading()
                     dismiss()
                     listener.codeChecked()
                 }
                 Status.ERROR -> {
-                    parentActivity<LoginHostActivity>().hideLoading()
+                    parentActivity<LoginBaseActivity>().hideLoading()
                     if (it.data!!.error?.code == 400) {
                         binding.wrongIndicatorTv.isVisible = true
                     }
                 }
                 Status.NETWORK -> {
-                    parentActivity<LoginHostActivity>().hideLoading()
+                    parentActivity<LoginBaseActivity>().hideLoading()
                     toast("Проблемы с подключением")
                 }
             }

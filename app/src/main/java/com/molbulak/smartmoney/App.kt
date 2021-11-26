@@ -1,13 +1,11 @@
 package com.molbulak.smartmoney
 
 import android.app.Application
-import com.github.terrakok.cicerone.Cicerone
-import com.github.terrakok.cicerone.NavigatorHolder
-import com.github.terrakok.cicerone.Router
+import com.molbulak.smartmoney.cicerone.LocalCiceroneHolder
+import com.molbulak.smartmoney.di.navigationModule
 import com.molbulak.smartmoney.di.viewModelModule
 import com.molbulak.smartmoney.service.preference.AppPreferences
 import com.molbulak.smartmoney.service.preference.EncryptedPreferences
-import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -15,29 +13,19 @@ import org.koin.core.context.startKoin
 class App : Application() {
 
     companion object {
-        lateinit var INSTANCE: App
-
-        fun getRouter(): Router {
-            return INSTANCE.cicerone.router
-        }
+        lateinit var localCicerone: LocalCiceroneHolder
     }
 
-    private lateinit var cicerone: Cicerone<Router>
     override fun onCreate() {
         super.onCreate()
         AppPreferences.init(this)
         EncryptedPreferences.init(this)
-
-        INSTANCE = this
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(viewModelModule)
+            modules(listOf(viewModelModule, navigationModule))
         }
-    }
-
-    fun getNavigator(): NavigatorHolder {
-        return cicerone.getNavigatorHolder()
+        localCicerone = LocalCiceroneHolder
     }
 
 }

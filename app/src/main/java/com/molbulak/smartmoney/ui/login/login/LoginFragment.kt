@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import com.molbulak.smartmoney.App
+import com.github.terrakok.cicerone.Router
 import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
 import com.molbulak.smartmoney.databinding.FragmentLoginBinding
@@ -19,16 +19,18 @@ import com.molbulak.smartmoney.service.network.Status
 import com.molbulak.smartmoney.service.network.body.LoginBody
 import com.molbulak.smartmoney.service.preference.AppPreferences
 import com.molbulak.smartmoney.service.preference.EncryptedPreferences
-import com.molbulak.smartmoney.ui.login.LoginHostActivity
+import com.molbulak.smartmoney.ui.login.LoginBaseActivity
 import com.molbulak.smartmoney.ui.login.LoginViewModel
 import com.molbulak.smartmoney.util.MyUtil
 import com.molbulak.smartmoney.util.enums.LoginType
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val viewModel: LoginViewModel by viewModel()
-
+    private val router : Router by inject()
+    
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -72,7 +74,7 @@ class LoginFragment : Fragment() {
 
     private fun initAuth() {
         binding.authButton.setOnClickListener {
-            App.getRouter().navigateTo(Screens.CheckNumberScreen())
+            router.navigateTo(Screens.CheckNumberScreen())
         }
     }
 
@@ -81,12 +83,12 @@ class LoginFragment : Fragment() {
             login(LoginType.LOGIN_CLICK)
         }
         binding.forgotButton.setOnClickListener {
-            App.getRouter().navigateTo(Screens.RestoreScreen())
+            router.navigateTo(Screens.RestoreScreen())
         }
     }
 
     fun login(loginType: LoginType) {
-        parentActivity<LoginHostActivity>().showLoading()
+        parentActivity<LoginBaseActivity>().showLoading()
         val login = binding.loginEt.text.toString()
         val password = MyUtil.md5(binding.passwordEt.text.toString())
         val loginBody = when (loginType) {
@@ -111,14 +113,14 @@ class LoginFragment : Fragment() {
             val data = it.data
             when (it.status) {
                 Status.SUCCESS -> {
-                    parentActivity<LoginHostActivity>().hideLoading()
+                    parentActivity<LoginBaseActivity>().hideLoading()
 
                     AppPreferences.isLogined = true
                     AppPreferences.token = data!!.result!!.token
 
                     when (loginType) {
-                        LoginType.PIN_CODE -> App.getRouter().newRootScreen(Screens.MainScreen())
-                        LoginType.FINGERPRINT -> App.getRouter().newRootScreen(Screens.MainScreen())
+                        LoginType.PIN_CODE -> router.newRootScreen(Screens.MainScreen())
+                        LoginType.FINGERPRINT -> router.newRootScreen(Screens.MainScreen())
                         LoginType.LOGIN_CLICK -> {
                             EncryptedPreferences.login = login
                             AppPreferences.login = login
@@ -126,7 +128,7 @@ class LoginFragment : Fragment() {
                             if (binding.usePinCb.isChecked && AppPreferences.pinCodeIsEmpty())
                                 ChoosePinCodeBF().show(childFragmentManager, "ChoosePinCodeBF")
                             else
-                                App.getRouter().newRootScreen(Screens.MainScreen())
+                                router.newRootScreen(Screens.MainScreen())
                         }
                     }
                     AppPreferences.rememberLogin = binding.rememberLoginCb.isChecked
@@ -134,11 +136,11 @@ class LoginFragment : Fragment() {
                     AppPreferences.useFingerprint = binding.useFingerprintCb.isChecked
                 }
                 Status.ERROR -> {
-                    parentActivity<LoginHostActivity>().hideLoading()
+                    parentActivity<LoginBaseActivity>().hideLoading()
                     toast("error login ${data!!.error?.code}")
                 }
                 Status.NETWORK -> {
-                    parentActivity<LoginHostActivity>().hideLoading()
+                    parentActivity<LoginBaseActivity>().hideLoading()
                     toast("Проблемы с подключением")
                 }
             }

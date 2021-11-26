@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.terrakok.cicerone.Router
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.molbulak.smartmoney.App
 import com.molbulak.smartmoney.R
@@ -11,6 +12,7 @@ import com.molbulak.smartmoney.Screens
 import com.molbulak.smartmoney.databinding.FragmentChoosePinCodeBBinding
 import com.molbulak.smartmoney.extensions.parentFragment
 import com.molbulak.smartmoney.service.preference.AppPreferences
+import org.koin.android.ext.android.inject
 
 
 class ChoosePinCodeBF : BottomSheetDialogFragment() {
@@ -20,6 +22,7 @@ class ChoosePinCodeBF : BottomSheetDialogFragment() {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
     }
+    private val router : Router by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +46,7 @@ class ChoosePinCodeBF : BottomSheetDialogFragment() {
                 if (pinCode1.isNotEmpty() && pinCode2.isNotEmpty()) {
                     if (pinCode1 == pinCode2) {
                             AppPreferences.pinCode = pinCode.text.toString()
-                            App.getRouter().newRootScreen(Screens.MainScreen())
+                            router.newRootScreen(Screens.MainScreen())
                     }
                 }
             }

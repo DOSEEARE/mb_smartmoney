@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.molbulak.smartmoney.App
+import com.github.terrakok.cicerone.Router
 import com.molbulak.smartmoney.R
 import com.molbulak.smartmoney.Screens
 import com.molbulak.smartmoney.adapter.SelectCountryListener
@@ -16,9 +16,10 @@ import com.molbulak.smartmoney.extensions.toast
 import com.molbulak.smartmoney.service.network.Status
 import com.molbulak.smartmoney.service.network.body.CheckPhoneBody
 import com.molbulak.smartmoney.service.network.response.country.Country
-import com.molbulak.smartmoney.ui.login.LoginHostActivity
+import com.molbulak.smartmoney.ui.login.LoginBaseActivity
 import com.molbulak.smartmoney.ui.login.LoginViewModel
 import com.molbulak.smartmoney.util.MyUtil
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.tinkoff.decoro.MaskImpl
 import ru.tinkoff.decoro.slots.PredefinedSlots
@@ -35,6 +36,7 @@ class CheckNumberFragment : Fragment(), SelectCountryListener {
     private var inputMask =
         MaskFormatWatcher(MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER))
 
+    private val router : Router by inject()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -45,7 +47,7 @@ class CheckNumberFragment : Fragment(), SelectCountryListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.backBtn.setOnClickListener { App.getRouter().exit() }
+        binding.backBtn.setOnClickListener { router.exit() }
         binding.numberPhone.inputType = InputType.TYPE_CLASS_PHONE
         binding.nextBtn.setOnClickListener {
             checkNumberPhone()
@@ -55,13 +57,13 @@ class CheckNumberFragment : Fragment(), SelectCountryListener {
 
 
     private fun initAvailableCountries() {
-        parentActivity<LoginHostActivity>().showLoading()
+        parentActivity<LoginBaseActivity>().showLoading()
         chooseFragment = ChooseCountryBF(availableCountries, selectedCountry, this)
         viewModel.availableCountry().observe(viewLifecycleOwner, {
             val data = it.data
             when (it.status) {
                 Status.SUCCESS -> {
-                    parentActivity<LoginHostActivity>().hideLoading()
+                    parentActivity<LoginBaseActivity>().hideLoading()
                     availableCountries = (it.data?.result!!)
                     binding.countryDrop.setOnClickListener {
                         chooseFragment =
@@ -70,11 +72,11 @@ class CheckNumberFragment : Fragment(), SelectCountryListener {
                     }
                 }
                 Status.ERROR -> {
-                    parentActivity<LoginHostActivity>().hideLoading()
+                    parentActivity<LoginBaseActivity>().hideLoading()
                     toast("error country ${data!!.error?.code}")
                 }
                 Status.NETWORK -> {
-                    parentActivity<LoginHostActivity>().hideLoading()
+                    parentActivity<LoginBaseActivity>().hideLoading()
                     toast("Проблемы с подключением")
                 }
             }
@@ -82,7 +84,7 @@ class CheckNumberFragment : Fragment(), SelectCountryListener {
     }
 
     private fun checkNumberPhone() {
-        parentActivity<LoginHostActivity>().showLoading()
+        parentActivity<LoginBaseActivity>().showLoading()
         val notFormatNumber = binding.numberPhone.text.toString()
         val formatNumber = MyUtil.onlyDigits(notFormatNumber)
         if (notFormatNumber.isEmpty()) return
@@ -94,7 +96,7 @@ class CheckNumberFragment : Fragment(), SelectCountryListener {
             when (it.status) {
                 Status.SUCCESS -> {
                     CheckCodeBF(data?.result!!.id) {
-                        App.getRouter()
+                        router
                             .navigateTo(Screens.AuthScreen(selectedCountry!!, notFormatNumber))
                     }.show(childFragmentManager, "CheckCodeBF")
                 }
@@ -105,7 +107,7 @@ class CheckNumberFragment : Fragment(), SelectCountryListener {
                     toast("Проблемы с подключением")
                 }
             }
-            parentActivity<LoginHostActivity>().hideLoading()
+            parentActivity<LoginBaseActivity>().hideLoading()
         })
     }
 

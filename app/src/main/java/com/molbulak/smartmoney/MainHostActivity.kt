@@ -4,56 +4,40 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import com.github.terrakok.cicerone.androidx.AppNavigator
-import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.molbulak.smartmoney.adapter.ViewPagerAdapter
 import com.molbulak.smartmoney.databinding.ActivityMainHostBinding
 import com.molbulak.smartmoney.databinding.DialogLoadingBinding
 import com.molbulak.smartmoney.databinding.DialogSuccessBinding
+import com.molbulak.smartmoney.ui.BackButtonListener
 import com.molbulak.smartmoney.ui.ContainerFragment
-import com.molbulak.smartmoney.ui.loan.LoanFragment
-import com.molbulak.smartmoney.ui.more.MoreFragment
-import com.molbulak.smartmoney.ui.notification.NotificationFragment
-import com.molbulak.smartmoney.ui.profile.ProfileFragment
-import com.molbulak.smartmoney.ui.support.SupportFragment
 import com.molbulak.smartmoney.util.ClickListener
-import com.molbulak.smartmoney.util.enums.FragmentType
+import com.molbulak.smartmoney.util.enums.ContainerType
 
 
 class MainHostActivity : AppCompatActivity() {
 
     private lateinit var loadingDialog: Dialog
     private lateinit var binding: ActivityMainHostBinding
-
-
-    private lateinit var navigator: AppNavigator
-
+    private lateinit var pagerAdapter: ViewPagerAdapter
+    private var currentFragmentPos = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        navigator = object : AppNavigator(this, R.id.container) {}
         binding = ActivityMainHostBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initBottomNav()
     }
 
     private fun initBottomNav() {
-        val pagerAdapter = ViewPagerAdapter(supportFragmentManager)
-/*        pagerAdapter.addFragment(LoanFragment())
-        pagerAdapter.addFragment(NotificationFragment())
-        pagerAdapter.addFragment(ProfileFragment())
-        pagerAdapter.addFragment(SupportFragment())
-        pagerAdapter.addFragment(MoreFragment())*/
-
-        pagerAdapter.addFragment(ContainerFragment(FragmentType.LOAN))
-        pagerAdapter.addFragment(ContainerFragment(FragmentType.NOTIFICATION))
-        pagerAdapter.addFragment(ContainerFragment(FragmentType.PROFILE))
-        pagerAdapter.addFragment(ContainerFragment(FragmentType.SUPPORT))
-        pagerAdapter.addFragment(ContainerFragment(FragmentType.MORE))
+        pagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        pagerAdapter.addFragment(ContainerFragment(ContainerType.LOAN))
+        pagerAdapter.addFragment(ContainerFragment(ContainerType.NOTICE))
+        pagerAdapter.addFragment(ContainerFragment(ContainerType.PROFILE))
+        pagerAdapter.addFragment(ContainerFragment(ContainerType.SUPPORT))
+        pagerAdapter.addFragment(ContainerFragment(ContainerType.MORE))
 
         binding.mainContainer.adapter = pagerAdapter
+
         val bottomNavigationView = binding.navView
         binding.mainContainer.offscreenPageLimit = 4
         bottomNavigationView.setOnItemSelectedListener { item ->
@@ -61,23 +45,33 @@ class MainHostActivity : AppCompatActivity() {
                 when (item.itemId) {
                     R.id.nav_loan -> {
                         binding.mainContainer.setCurrentItem(0, false)
+                        currentFragmentPos = 0
                     }
                     R.id.nav_notification -> {
                         binding.mainContainer.setCurrentItem(1, false)
+                        currentFragmentPos = 1
                     }
                     R.id.nav_profile -> {
                         binding.mainContainer.setCurrentItem(2, false)
+                        currentFragmentPos = 2
                     }
                     R.id.nav_support -> {
                         binding.mainContainer.setCurrentItem(3, false)
+                        currentFragmentPos = 3
                     }
                     R.id.nav_more -> {
                         binding.mainContainer.setCurrentItem(4, false)
+                        currentFragmentPos = 4
                     }
                 }
             }
             true
         }
+    }
+
+    override fun onBackPressed() {
+        val currentFragment = pagerAdapter.getItem(currentFragmentPos)
+        (currentFragment as BackButtonListener).backPressed()
     }
 
     fun showSuccess(
