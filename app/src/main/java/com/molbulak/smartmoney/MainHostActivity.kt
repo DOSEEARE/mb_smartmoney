@@ -37,7 +37,6 @@ class MainHostActivity : AppCompatActivity() {
         pagerAdapter.addFragment(ContainerFragment(ContainerType.MORE))
 
         binding.mainContainer.adapter = pagerAdapter
-
         val bottomNavigationView = binding.navView
         binding.mainContainer.offscreenPageLimit = 4
         bottomNavigationView.setOnItemSelectedListener { item ->

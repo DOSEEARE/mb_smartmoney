@@ -120,7 +120,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/make_repayment_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -132,43 +132,46 @@
         android:textAllCaps="false"
         android:textColor="@color/white" />
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/orange_divider"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/default_margin"
-        android:background="@drawable/bg_loan_111orange">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/news_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="56dp"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/small_margin"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toTopOf="@id/orange_divider"
+            tools:listitem="@layout/item_news" />
+
+        <TextView
+            android:id="@+id/orange_divider"
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
+            android:background="@drawable/ic_orange_divider"
+            android:gravity="center_horizontal"
+            android:paddingVertical="@dimen/default_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_text"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/loan_status_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:maxLines="1"
             android:paddingVertical="@dimen/default_text"
             android:text="@string/have_not_loan"
             android:textColor="@color/white"
             android:textSize="@dimen/default_text"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/bg_choose_country"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/loan_status_tv">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/news_rv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/default_margin"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_news" />
-
-        </LinearLayout>
+            app:layout_constraintBottom_toTopOf="@id/news_rv"
+            app:layout_constraintTop_toTopOf="@id/orange_divider" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

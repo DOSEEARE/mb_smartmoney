@@ -29,8 +29,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val viewModel: LoginViewModel by viewModel()
-    private val router : Router by inject()
-    
+    private val router: Router by inject()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -88,6 +88,11 @@ class LoginFragment : Fragment() {
     }
 
     fun login(loginType: LoginType) {
+        if (loginType == LoginType.LOGIN_CLICK)
+            if (binding.loginEt.text.isNullOrEmpty() || binding.passwordEt.text.isNullOrEmpty()) {
+                toast("Введите оба поля")
+                return
+            }
         parentActivity<LoginBaseActivity>().showLoading()
         val login = binding.loginEt.text.toString()
         val password = MyUtil.md5(binding.passwordEt.text.toString())

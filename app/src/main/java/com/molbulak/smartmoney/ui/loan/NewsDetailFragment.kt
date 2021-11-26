@@ -33,7 +33,7 @@ class NewsDetailFragment(private val news: News) : Fragment() {
             contentTv.text = news.description
 
             toolbar.tbBackBtn.setOnClickListener {
-                App.localCicerone.getCicerone(ContainerType.LOAN).router
+                App.localCicerone.getCicerone(ContainerType.LOAN).router.exit()
             }
         }
     }

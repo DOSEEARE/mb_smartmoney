@@ -18,7 +18,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
-    <androidx.viewpager.widget.ViewPager
+    <com.molbulak.smartmoney.custom.viewpager.CustomViewPager
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"

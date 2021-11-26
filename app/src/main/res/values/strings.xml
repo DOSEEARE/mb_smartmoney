@@ -62,4 +62,6 @@
     <string name="make_repayment">Внести погашение</string>
     <string name="have_not_loan">У вас нет активного займа</string>
     <string name="news">Новость</string>
+    <string name="description_notice">Описание уведомления</string>
+    <string name="login_btn">Войти</string>
 </resources>

@@ -2,7 +2,7 @@ package com.molbulak.smartmoney.service.network.response.notice
 
 import com.molbulak.smartmoney.service.network.response.CrmError
 
-data class NoticeResponse(
+data class NoticeListResponse(
     val code: Int,
     val result: List<Notice>?,
     val error: CrmError?

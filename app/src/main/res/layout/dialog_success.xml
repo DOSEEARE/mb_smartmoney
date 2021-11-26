@@ -39,7 +39,7 @@
             android:text="@string/success_credit"
             android:textSize="13sp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/accept_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

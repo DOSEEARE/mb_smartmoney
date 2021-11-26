@@ -239,7 +239,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/auth_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

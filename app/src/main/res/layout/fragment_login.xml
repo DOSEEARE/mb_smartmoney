@@ -44,34 +44,30 @@
             android:layout_marginTop="@dimen/default_margin"
             android:background="@drawable/bg_input"
             android:hint="@string/login"
+            android:importantForAutofill="no"
             android:inputType="number"
             android:maxLines="1"
             android:paddingStart="@dimen/default_margin"
             android:textCursorDrawable="@drawable/bg_cursor_orange"
             android:textSize="12sp" />
 
-
-        <com.google.android.material.textfield.TextInputLayout
+        <com.marlonmafra.android.widget.EditTextPassword
+            android:id="@+id/password_et"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/input_height"
+            app:iconPosition="right"
+            app:hidePasswordIcon="@drawable/ic_hide_pass"
+            app:showPasswordIcon="@drawable/ic_show_pass"
+            android:paddingEnd="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
-            app:boxStrokeWidth="0dp"
-            app:hintEnabled="false"
-            app:passwordToggleEnabled="true">
-
-            <EditText
-                android:id="@+id/password_et"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/input_height"
-                android:background="@drawable/bg_input"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:paddingStart="@dimen/default_margin"
-                android:textCursorDrawable="@drawable/bg_cursor_orange"
-                android:textSize="12sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:background="@drawable/bg_input"
+            android:hint="@string/password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingStart="@dimen/default_margin"
+            android:textCursorDrawable="@drawable/bg_cursor_orange"
+            android:textSize="12sp" />
 
         <CheckBox
             android:id="@+id/remember_login_cb"
@@ -97,14 +93,14 @@
             android:text="@string/login_by_fingerprint"
             android:theme="@style/MyCheckBox" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:background="@drawable/bg_default_btn"
             android:foreground="?attr/selectableItemBackground"
-            android:text="@string/next"
+            android:text="@string/login_btn"
             android:textColor="@color/white" />
 
         <TextView

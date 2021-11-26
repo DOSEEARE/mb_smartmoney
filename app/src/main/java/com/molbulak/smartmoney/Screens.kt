@@ -14,8 +14,8 @@ import com.molbulak.smartmoney.ui.login.check_number.CheckNumberFragment
 import com.molbulak.smartmoney.ui.login.login.LoginFragment
 import com.molbulak.smartmoney.ui.login.restore.RestoreFragment
 import com.molbulak.smartmoney.ui.more.MoreFragment
-import com.molbulak.smartmoney.ui.notification.NoticeDetailFragment
-import com.molbulak.smartmoney.ui.notification.NoticeFragment
+import com.molbulak.smartmoney.ui.notice.NoticeDetailFragment
+import com.molbulak.smartmoney.ui.notice.NoticeFragment
 import com.molbulak.smartmoney.ui.profile.ProfileFragment
 import com.molbulak.smartmoney.ui.support.SupportFragment
 
