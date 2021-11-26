@@ -15,7 +15,7 @@
         android:padding="@dimen/default_margin"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             android:gravity="center_horizontal"
             android:text="@string/restore_password"
             android:textSize="@dimen/title_size"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -79,7 +79,7 @@
             android:paddingStart="@dimen/default_margin"
             android:textSize="12sp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/next_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

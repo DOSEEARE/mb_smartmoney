@@ -1,9 +1,10 @@
-package com.molbulak.smartmoney.ui.notification
+package com.molbulak.smartmoney.ui.notice
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.github.terrakok.cicerone.Router
 import com.molbulak.smartmoney.App
@@ -36,7 +37,8 @@ class NoticeFragment : Fragment(), BackButtonListener {
 
     private fun initViews() {
         binding.toolbar.tbTitleTv.text = getString(R.string.title_notification)
-        viewModel.listNotice.observe(viewLifecycleOwner, {
+        binding.toolbar.tbBackBtn.isVisible = false
+        viewModel.listNoticeList.observe(viewLifecycleOwner, {
             val data = it.data
             when (it.status) {
                 Status.SUCCESS -> {

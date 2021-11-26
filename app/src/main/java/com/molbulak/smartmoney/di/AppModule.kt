@@ -3,11 +3,9 @@ package com.molbulak.smartmoney.di
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
-import com.molbulak.smartmoney.cicerone.LocalCiceroneHolder
 import com.molbulak.smartmoney.ui.loan.LoanViewModel
 import com.molbulak.smartmoney.ui.login.LoginViewModel
-import com.molbulak.smartmoney.ui.notification.NoticeViewModel
-import com.molbulak.smartmoney.util.enums.ContainerType
+import com.molbulak.smartmoney.ui.notice.NoticeViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

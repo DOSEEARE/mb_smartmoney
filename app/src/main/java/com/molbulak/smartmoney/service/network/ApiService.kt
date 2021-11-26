@@ -8,7 +8,8 @@ import com.molbulak.smartmoney.service.network.response.gender.GenderResponse
 import com.molbulak.smartmoney.service.network.response.login.LoginResponse
 import com.molbulak.smartmoney.service.network.response.nationality.NationalityResponse
 import com.molbulak.smartmoney.service.network.response.news.NewsResponse
-import com.molbulak.smartmoney.service.network.response.notice.NoticeResponse
+import com.molbulak.smartmoney.service.network.response.notice.NoticeDetailResponse
+import com.molbulak.smartmoney.service.network.response.notice.NoticeListResponse
 import com.molbulak.smartmoney.service.network.response.question.QuestionResponse
 import com.molbulak.smartmoney.service.network.response.restore.RestoreResponse
 import okhttp3.MultipartBody
@@ -61,5 +62,9 @@ interface ApiService {
 
     @POST("listNotice/")
     suspend fun listNotice()
-            : Response<NoticeResponse>
+            : Response<NoticeListResponse>
+
+    @POST("getNotice/")
+    suspend fun noticeDetail(@Body noticeDetailBody : MultipartBody)
+            : Response<NoticeDetailResponse>
 }

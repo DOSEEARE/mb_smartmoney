@@ -99,4 +99,6 @@ dependencies {
 
     def lottie = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottie"
+
+    implementation 'com.marlonmafra.android.widget:edittext-password:1.0.0'
 }

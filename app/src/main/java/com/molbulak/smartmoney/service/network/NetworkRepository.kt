@@ -320,6 +320,43 @@ class NetworkRepository(private val context: Context) {
         }
     }
 
+    fun noticeDetail(id: String) = liveData(Dispatchers.IO) {
+        try {
+            val formData = MultipartBody.Builder().run {
+                setType(MultipartBody.FORM)
+                addFormDataPart("id", id)
+                build()
+            }
+            val response = RetrofitClient.apiService().noticeDetail(formData)
+            when {
+                response.isSuccessful -> {
+                    val crmCode = response.body()?.code
+                    val response = response.body()
+                    if (crmCode in 200..300) {
+                        if (response?.result != null) {
+                            emit(Resource.success(
+                                data = response,
+                                msg = "",
+                                code = response.code))
+                        }
+                        if (response?.error != null) {
+                            emit(Resource.error(
+                                data = response,
+                                msg = response.error.message,
+                                code = response.error.code))
+                        }
+                    }
+                }
+                else -> {
+                    response.raw().request.url
+                    emit(Resource.error(null, response.message(), response.code()))
+                }
+            }
+        } catch (e: Exception) {
+            emit(Resource.network(null, "Проблемы с подключением интернета", 0))
+        }
+    }
+
     fun listNews() = liveData(Dispatchers.IO) {
         try {
             val response = RetrofitClient.apiService().listNews()
