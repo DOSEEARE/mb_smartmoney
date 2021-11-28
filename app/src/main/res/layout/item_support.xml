@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_margin"
+        android:text="Как получить заем"
+        app:layout_constraintBottom_toBottomOf="@id/arrow_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/arrow_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_margin"
+        android:src="@drawable/ic_arrow_up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:id="@+id/expand_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:el_expanded="false"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/title_tv"
+        tools:expandable_isExpanded="true">
+
+        <TextView
+            android:id="@+id/content_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </net.cachapa.expandablelayout.ExpandableLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintTop_toBottomOf="@id/expand_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

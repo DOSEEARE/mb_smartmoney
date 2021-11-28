@@ -5,6 +5,17 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.33055555555555555" />
         <entry key="../../Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/drawable/ic_arrow_up.xml" value="0.3828125" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/fragment_auth.xml" value="0.26132246376811596" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/fragment_check_number.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/fragment_container.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/fragment_notice_detail.xml" value="0.26132246376811596" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/fragment_notification.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/fragment_support.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/include_toolbar.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/item_choose_country.xml" value="0.26132246376811596" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/item_notice.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/item_support.xml" value="0.36666666666666664" />
         <entry key="app/src/main/res/drawable/bg_choose_country.xml" value="0.246875" />
         <entry key="app/src/main/res/drawable/bg_datepicker.xml" value="0.1671875" />
         <entry key="app/src/main/res/drawable/bg_default_btn.xml" value="0.2875" />

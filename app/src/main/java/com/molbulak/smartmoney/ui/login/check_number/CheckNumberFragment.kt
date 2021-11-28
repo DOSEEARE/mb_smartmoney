@@ -36,7 +36,7 @@ class CheckNumberFragment : Fragment(), SelectCountryListener {
     private var inputMask =
         MaskFormatWatcher(MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER))
 
-    private val router : Router by inject()
+    private val router: Router by inject()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -70,6 +70,8 @@ class CheckNumberFragment : Fragment(), SelectCountryListener {
                             ChooseCountryBF(availableCountries, selectedCountry, this)
                         chooseFragment.show(childFragmentManager, "ChooseCountryBottomFragment")
                     }
+                    binding.countryDrop.setText(data?.result!![0].name)
+                    this.countrySelected((data.result[0]))
                 }
                 Status.ERROR -> {
                     parentActivity<LoginBaseActivity>().hideLoading()

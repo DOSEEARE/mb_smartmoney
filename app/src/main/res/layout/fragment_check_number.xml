@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.check_number.CheckNumberFragment">
 
-
     <ImageButton
         android:id="@+id/back_btn"
         android:layout_width="wrap_content"
