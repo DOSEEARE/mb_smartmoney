@@ -43,11 +43,11 @@
         <entry key="app/src/main/res/layout/fragment_container.xml" value="0.2390625" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.19583333333333333" />
-        <entry key="app/src/main/res/layout/fragment_loan.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_loan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/layout/fragment_news_detail.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_notice_detail.xml" value="0.2546875" />
+        <entry key="app/src/main/res/layout/fragment_notice_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_pin_code_bf.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2713541666666667" />
