@@ -4,6 +4,7 @@ import com.molbulak.smartmoney.service.network.response.AuthResponse
 import com.molbulak.smartmoney.service.network.response.check_code.CheckCodeResponse
 import com.molbulak.smartmoney.service.network.response.check_phone.CheckPhoneResponse
 import com.molbulak.smartmoney.service.network.response.country.CountryResponse
+import com.molbulak.smartmoney.service.network.response.faq.FaqResponse
 import com.molbulak.smartmoney.service.network.response.gender.GenderResponse
 import com.molbulak.smartmoney.service.network.response.login.LoginResponse
 import com.molbulak.smartmoney.service.network.response.nationality.NationalityResponse
@@ -67,4 +68,8 @@ interface ApiService {
     @POST("getNotice/")
     suspend fun noticeDetail(@Body noticeDetailBody : MultipartBody)
             : Response<NoticeDetailResponse>
+
+    @POST("listFaq/")
+    suspend fun listFaq()
+            : Response<FaqResponse>
 }

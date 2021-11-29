@@ -101,4 +101,11 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottie"
 
     implementation 'com.marlonmafra.android.widget:edittext-password:1.0.0'
+
+    implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'com.legendmohe.maven:slidingdrawabletablayout:0.1'
+
 }

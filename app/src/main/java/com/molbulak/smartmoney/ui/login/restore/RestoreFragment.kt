@@ -36,7 +36,7 @@ class RestoreFragment : Fragment(), SelectCountryListener {
 
     private var inputMask =
         MaskFormatWatcher(MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER))
-    private val router : Router by inject()
+    private val router: Router by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,7 +68,8 @@ class RestoreFragment : Fragment(), SelectCountryListener {
                     parentActivity<LoginBaseActivity>().showSuccess(
                         getString(R.string.success_restore),
                         getString(R.string.loginpas_sms),
-                        getString(R.string.accept)) { dialog ->
+                        getString(R.string.accept)
+                    ) { dialog ->
                         dialog.dismiss()
                         router.newRootScreen(Screens.LoginScreen())
                     }
@@ -101,20 +102,26 @@ class RestoreFragment : Fragment(), SelectCountryListener {
     }
 
     private fun initCountry() {
+        parentActivity<LoginBaseActivity>().showLoading()
         viewModel.availableCountry().observe(viewLifecycleOwner, {
             val data = it.data
             when (it.status) {
                 Status.SUCCESS -> {
+                    parentActivity<LoginBaseActivity>().hideLoading()
                     availableCountries = (it.data?.result!!)
                     binding.countryDb.setOnClickListener {
                         chooseCountryBF = ChooseCountryBF(availableCountries, selectedCountry, this)
                         chooseCountryBF.show(childFragmentManager, "ChooseCountryBottomFragment")
                     }
+                    binding.countryDb.setText(data?.result!![0].name)
+                    this.countrySelected((data.result[0]))
                 }
                 Status.ERROR -> {
+                    parentActivity<LoginBaseActivity>().hideLoading()
                     toast("error country ${data!!.error?.code}")
                 }
                 Status.NETWORK -> {
+                    parentActivity<LoginBaseActivity>().hideLoading()
                     toast("Проблемы с подключением")
                 }
             }
