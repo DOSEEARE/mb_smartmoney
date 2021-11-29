@@ -28,15 +28,16 @@
         android:id="@+id/expand_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:el_expanded="false"
         android:visibility="gone"
+        app:el_expanded="false"
         app:layout_constraintTop_toBottomOf="@id/title_tv"
         tools:expandable_isExpanded="true">
 
         <TextView
             android:id="@+id/content_tv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin" />
 
     </net.cachapa.expandablelayout.ExpandableLayout>
 

@@ -6,6 +6,7 @@ import com.github.terrakok.cicerone.Router
 import com.molbulak.smartmoney.ui.loan.LoanViewModel
 import com.molbulak.smartmoney.ui.login.LoginViewModel
 import com.molbulak.smartmoney.ui.notice.NoticeViewModel
+import com.molbulak.smartmoney.ui.profile.ProfileViewModel
 import com.molbulak.smartmoney.ui.support.SupportViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -16,6 +17,7 @@ val viewModelModule = module {
     viewModel { LoanViewModel(androidApplication()) }
     viewModel { NoticeViewModel(androidApplication()) }
     viewModel { SupportViewModel(androidApplication()) }
+    viewModel { ProfileViewModel(androidApplication()) }
 }
 
 
@@ -23,7 +25,7 @@ val navigationModule = module {
     single { Cicerone.create() }
     single { getRouter(get()) }
     factory { getNavigatorHolder(get()) }
-  //  single { params -> LocalCiceroneHolder(params.get<ContainerType>() as ContainerType) }
+    //  single { params -> LocalCiceroneHolder(params.get<ContainerType>() as ContainerType) }
 }
 
 fun getNavigatorHolder(cicerone: Cicerone<Router>): NavigatorHolder = cicerone.getNavigatorHolder()

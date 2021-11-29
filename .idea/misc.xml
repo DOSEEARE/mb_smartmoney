@@ -5,17 +5,6 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.33055555555555555" />
         <entry key="../../Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.21354166666666666" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/drawable/ic_arrow_up.xml" value="0.3828125" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/fragment_auth.xml" value="0.26132246376811596" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/fragment_check_number.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/fragment_container.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/fragment_notice_detail.xml" value="0.26132246376811596" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/fragment_notification.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/fragment_support.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/include_toolbar.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/item_choose_country.xml" value="0.26132246376811596" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/item_notice.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/mb_smartmoney/app/src/main/res/layout/item_support.xml" value="0.36666666666666664" />
         <entry key="app/src/main/res/drawable/bg_choose_country.xml" value="0.246875" />
         <entry key="app/src/main/res/drawable/bg_datepicker.xml" value="0.1671875" />
         <entry key="app/src/main/res/drawable/bg_default_btn.xml" value="0.2875" />
@@ -26,6 +15,8 @@
         <entry key="app/src/main/res/drawable/bg_login_btn.xml" value="0.33055555555555555" />
         <entry key="app/src/main/res/drawable/bg_news.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/drawable/bg_news_img.xml" value="0.2890625" />
+        <entry key="app/src/main/res/drawable/bg_profile_selected.xml" value="0.28020833333333334" />
+        <entry key="app/src/main/res/drawable/bg_profile_unselected.xml" value="0.28020833333333334" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.24583333333333332" />
         <entry key="app/src/main/res/drawable/ic_back_white.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/drawable/ic_backspace.xml" value="0.3692708333333333" />
@@ -33,6 +24,7 @@
         <entry key="app/src/main/res/drawable/ic_group_60.xml" value="0.2890625" />
         <entry key="app/src/main/res/drawable/ic_hide_pass.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/drawable/ic_hide_password.xml" value="1.8666666666666667" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.28020833333333334" />
         <entry key="app/src/main/res/drawable/ic_support.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/drawable/ic_wallet.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/drawable/ic_warning.xml" value="0.28229166666666666" />
@@ -53,15 +45,18 @@
         <entry key="app/src/main/res/layout/fragment_choose_pin_code_b.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_container.xml" value="0.2390625" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.2713541666666667" />
+        <entry key="app/src/main/res/layout/fragment_history.xml" value="0.22239583333333332" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.19583333333333333" />
-        <entry key="app/src/main/res/layout/fragment_loan.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_loan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/layout/fragment_news_detail.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_notice_detail.xml" value="0.2546875" />
+        <entry key="app/src/main/res/layout/fragment_notice_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_pin_code_bf.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2713541666666667" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_profile_detail.xml" value="0.353125" />
+        <entry key="app/src/main/res/layout/fragment_profile_history.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_restore.xml" value="0.3067708333333333" />
         <entry key="app/src/main/res/layout/fragment_support.xml" value="0.353125" />
         <entry key="app/src/main/res/layout/include_toolbar.xml" value="0.353125" />
@@ -69,6 +64,7 @@
         <entry key="app/src/main/res/layout/item_news.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_notice.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_notification.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_support.xml" value="0.353125" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.234375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.234375" />
